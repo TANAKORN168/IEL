@@ -18,7 +18,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="Dashboard"><img src="${pageContext.request.contextPath}/assets/IEL_Logo.png" class="img-circle" alt="IEL"></a>${appPath}
+    <a href="Dashboard"><img src="${pageContext.request.contextPath}/assets/IEL_Logo.png" alt="IEL"></a>${appPath}
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

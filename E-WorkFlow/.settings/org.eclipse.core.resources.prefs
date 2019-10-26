@@ -1,6 +1,9 @@
 eclipse.preferences.version=1
 encoding//WebContent/WEB-INF/view/header.jsp=UTF-8
+encoding//WebContent/WEB-INF/view/sourcing/request_vender/add_edit_request_vender.jsp=UTF-8
 encoding//WebContent/WEB-INF/view/sourcing/request_vender/list_request_vender.jsp=UTF-8
 encoding//src/application/controller/RequestVenderController.java=UTF-8
+encoding//src/application/model/sourcing/RequestVenderDetail.java=UTF-8
 encoding//src/application/model/sourcing/RequestVenderHead.java=UTF-8
 encoding//src/application/service/utility/MyDate.java=UTF-8
+separateDerivedEncodings=true

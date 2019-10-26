@@ -1,6 +1,6 @@
 package application.model.sourcing;
 
-import application.service.utility.MyTimestamp;
+import java.util.List;
 
 public class RequestVenderHead {
 
@@ -56,9 +56,15 @@ public class RequestVenderHead {
 	private boolean copy_bank_statement_individual;// สำเนาสมุดบัญชีเงินฝาก
 	private boolean copy_vat_certificate_individual;// สำเนาใบสำคัญทะเบียนบ้านภาษีมูลค่าเพิ่ม (ภ.พ. 20) (กรณีจดทะเบียนภาษีมูลค่าเพิ่ม )
 
-	private MyTimestamp timeadd;
-	private MyTimestamp timeupd;
-
+    private String timeadd_date;
+    private String timeadd_time;
+    private String timeadd_user;
+    private String timeupd_date;
+    private String timeupd_time;
+    private String timeupd_user;
+    
+    private List<RequestVenderDetail> details;
+    
 	public int getId() {
 		return id;
 	}
@@ -459,20 +465,60 @@ public class RequestVenderHead {
 		this.copy_vat_certificate_individual = copy_vat_certificate_individual;
 	}
 
-	public MyTimestamp getTimeadd() {
-		return timeadd;
+	public String getTimeadd_date() {
+		return timeadd_date;
 	}
 
-	public void setTimeadd(MyTimestamp timeadd) {
-		this.timeadd = timeadd;
+	public void setTimeadd_date(String timeadd_date) {
+		this.timeadd_date = timeadd_date;
 	}
 
-	public MyTimestamp getTimeupd() {
-		return timeupd;
+	public String getTimeadd_time() {
+		return timeadd_time;
 	}
 
-	public void setTimeupd(MyTimestamp timeupd) {
-		this.timeupd = timeupd;
+	public void setTimeadd_time(String timeadd_time) {
+		this.timeadd_time = timeadd_time;
+	}
+
+	public String getTimeadd_user() {
+		return timeadd_user;
+	}
+
+	public void setTimeadd_user(String timeadd_user) {
+		this.timeadd_user = timeadd_user;
+	}
+
+	public String getTimeupd_date() {
+		return timeupd_date;
+	}
+
+	public void setTimeupd_date(String timeupd_date) {
+		this.timeupd_date = timeupd_date;
+	}
+
+	public String getTimeupd_time() {
+		return timeupd_time;
+	}
+
+	public void setTimeupd_time(String timeupd_time) {
+		this.timeupd_time = timeupd_time;
+	}
+
+	public String getTimeupd_user() {
+		return timeupd_user;
+	}
+
+	public void setTimeupd_user(String timeupd_user) {
+		this.timeupd_user = timeupd_user;
+	}
+
+	public List<RequestVenderDetail> getDetails() {
+		return details;
+	}
+
+	public void setDetails(List<RequestVenderDetail> details) {
+		this.details = details;
 	}
 
 }

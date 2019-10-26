@@ -12,8 +12,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import application.service.utility.MyTimestamp;
-
 public class MapObject <T>{
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -128,28 +126,6 @@ public class MapObject <T>{
 	            		boolean value = Boolean.valueOf(str);
 		                field.set(dto, value);
 	            	}
-	            	
-	            	if("application.service.utility.MyTimestamp".equals(field_type)) {
-	            		String date = "";
-            			String time = "";
-            			String user = "";
-            			
-	            		if("timeadd".equals(field_name)){
-	            			date = rs.getParameter("timeadd_date");
-	            			time = rs.getParameter("timeadd_time");
-	            			user = rs.getParameter("timeadd_user");
-	            		}
-	            		
-	            		if("timeupd".equals(field_name)){
-	            			date = rs.getParameter("timeupd_date");
-	            			time = rs.getParameter("timeupd_time");
-	            			user = rs.getParameter("timeupd_user");
-	            		}
-	            		
-	            		MyTimestamp mt = new MyTimestamp(date, time, user);
-            			field.set(dto, mt);
-	            	}
-	            	
 	            } catch (Exception e) {
 	                e.printStackTrace();
 	            }
