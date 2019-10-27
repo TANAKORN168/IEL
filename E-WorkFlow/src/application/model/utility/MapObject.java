@@ -36,7 +36,7 @@ public class MapObject <T>{
 		        for(Field field: fields) {
 		        	String field_name = field.getName();
 		            String field_type = field.getType().getName();
-//			        System.out.println(field_type + " : " +field_name);
+			        System.out.println(field_type + " : " +field_name);
 		            try{
 		            	if("java.lang.String".equals(field_type)) {
 			                String value = rs.getString(field_name);
@@ -60,7 +60,7 @@ public class MapObject <T>{
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public T getDataFormRequest(Class c, HttpServletRequest rs) {
+	public T getDataFormRequest(Class c, HttpServletRequest rs, String last_prefix) {
 		try {
 			
 			rs.setCharacterEncoding("UTF-8");
@@ -81,7 +81,15 @@ public class MapObject <T>{
 	        for(Field field: fields) {
 	            String field_name = field.getName();
 	            String field_type = field.getType().getName();
-//		        System.out.println(field_type + " : " +field_name);
+		        System.out.println(field_type + " : " +field_name);
+		        
+		        if("id".equals(field_name)) continue;
+	            
+	            if(!"".equals(last_prefix)) {
+	            	field_name = field_name + last_prefix;
+	            }
+
+		        System.out.println(field_type + " : " +field_name);
 	            try{
 	            	String str = rs.getParameter(field_name);
 	            	

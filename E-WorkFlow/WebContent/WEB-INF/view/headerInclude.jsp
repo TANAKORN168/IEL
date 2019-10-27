@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/components/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/components/Ionicons/css/ionicons.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Admin.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/components/iCheck/square/blue.css">
 
 <!-- JS -->

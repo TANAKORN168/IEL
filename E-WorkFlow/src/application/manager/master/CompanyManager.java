@@ -1,8 +1,8 @@
-package application.manager;
+package application.manager.master;
 
 import java.util.List;
 
-import application.Dao.CompanyDao;
+import application.Dao.master.CompanyDao;
 import application.model.master.Company;
 
 public class CompanyManager {

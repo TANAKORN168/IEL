@@ -15,6 +15,7 @@ public class Users {
 	private Integer organization_id;
 	private String username;
 	private String password;
+	private String org_code;
 
 	public Integer getId() {
 		return id;
@@ -118,6 +119,14 @@ public class Users {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getOrg_code() {
+		return org_code;
+	}
+
+	public void setOrg_code(String org_code) {
+		this.org_code = org_code;
 	}
 
 }

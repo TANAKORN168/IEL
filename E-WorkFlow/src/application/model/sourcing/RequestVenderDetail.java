@@ -24,7 +24,7 @@ public class RequestVenderDetail {
 	private String supplier_name;//ชื่อผู้จำหน่าย
 	private String brand;//ยี่ห้อ
 	//เงื่อนไขทางการค้า
-	private  boolean is_take_back;//รับคืน
+	private  boolean is_take_back = true;//รับคืน
 	private String delivery_branch;//สาขาที่ส่งสินค้า
 	private String delivery_schedule;//กำหนดส่งสินค้า
 	

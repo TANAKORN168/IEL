@@ -5,7 +5,7 @@
     <section class="content">
     
     <section class="content-header">
-      <h1>สร้างใบขอเปิดบัญชีผู้จำหน่าย</h1>
+      <h1><u>สร้างใบขอเปิดบัญชีผู้จำหน่าย</u></h1>
     </section>
 
     <!-- Main content -->
@@ -22,6 +22,24 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-12 col-xs-12">
+							<div class="container" style="width: 100%">
+						       <ul class="progressbar">
+						           <c:forEach var="status_info" items="${command.list_status}"> 
+						           		<c:choose>
+										  <c:when test="${status_info.status_code < command.status_code}">
+										  	<li class="active" style="width: 20%">${status_info.status_code} ${status_info.status_name}</li>
+										  </c:when>
+										  <c:when test="${status_info.status_code == command.status_code}">
+										  	<li class="select" style="width: 20%">${status_info.status_code} ${status_info.status_name}</li>
+										  </c:when>
+										  <c:otherwise>
+										    	<li style="width: 20%">${status_info.status_code} ${status_info.status_name}</li>
+										  </c:otherwise>
+										</c:choose>
+					                 </c:forEach>
+						       </ul>
+						   </div>
+					
 					<div class="box-body">
 						<div class="box box-primary">
 							<div class="row">
@@ -279,7 +297,7 @@
 							</div>
 							<div class="row">
 								<div class="col-xs-12" style="font-size: 16px;">
-									<dd><u>สำหรับค่าสินค้าจะโอนชำระผ่านบัญชีธนาคาร  xxxxxxxxxxx  จำกัด  (มหาชน)</u></dd>
+									<div class="col-md-12" align="left" style="font-size: 16px;"><u>สำหรับค่าสินค้าจะโอนชำระผ่านบัญชีธนาคาร  xxxxxxxxxxx  จำกัด  (มหาชน)</u></div>
 								</div>
 							</div>
 							<div class="row">
@@ -388,67 +406,123 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="table-responsive">
-						<table id="myTable" class="table table-bordered" style="width: 2500px;max-width: none;">
-							<thead style="font-size: 14px;">
-								<tr class="bg-light-blue disabled ">
-									<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2">รหัสสินค้า</th>
-									<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2">รหัสบาร์โคด</th>
-									<th style="width: 200px;text-align: center;vertical-align: middle;" rowspan="2">ชื่อสินค้า</th>
-									<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2">ขนาดบรรจุ</th>
-									<th style="width: 100px;text-align: center;vertical-align: middle;" colspan="2">หน่วยหลัก/ย่อย</th>
-									<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2">ราคาขาย</th>
-									<th style="width: 150px;text-align: center;vertical-align: middle;" colspan="2">ราคาทุน</th>
-									<th style="width: 100px;text-align: center;vertical-align: middle;" colspan="2">GP</th>
-									<th style="width: 150px;text-align: center;vertical-align: middle;" rowspan="2">หมวดสินค้า</th>
-									<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2">รหัสผู้จำหน่าย</th>
-									<th style="width: 200px;text-align: center;vertical-align: middle;" rowspan="2">ชื่อผู้จำหน่าย</th>
-									<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2">ยี่ห้อ</th>
-									<th style="width: 200px;text-align: center;vertical-align: middle;" colspan="2">เงื่อนไขทางการค้า</th>
-									<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2">สาขาที่ส่งสินค้า</th>
-									<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2">กำหนดส่งสินค้า</th>
-									<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2"></th>
-								</tr>
-								<tr class="bg-light-blue disabled ">
-									<th style="text-align: center;vertical-align: middle;">หีบ</th>
-									<th style="text-align: center;vertical-align: middle;">มัด</th>
-									<th style="text-align: center;vertical-align: middle;">ทุนหลัก</th>
-									<th style="text-align: center;vertical-align: middle;">ทุนย่อย</th>
-									<th style="text-align: center;vertical-align: middle;">(บาท)</th>
-									<th style="text-align: center;vertical-align: middle;">(%)</th>
-									<th style="text-align: center;vertical-align: middle;">รับคืน</th>
-									<th style="text-align: center;vertical-align: middle;">ไม่รับคืน</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr id="row_1">
-									<td class="text-center"><input name="product_code_1" type="text" class="form-control" style="height: 25px;" value=""></td>
-									<td class="text-center"><input name="product_barcode_1" type="text" class="form-control" style="height: 25px;" value=""></td>
-									<td class="text-center"><input name="product_name_1" type="text" class="form-control" style="height: 25px;" value=""></td>
-									<td class="text-center"><input name="contain_1" type="text" class="form-control" style="height: 25px;" value=""></td>
-									<td class="text-center"><input name="chest_1" type="text" class="form-control" style="height: 25px;" value=""></td>
-									<td class="text-center"><input name="bundle_1" type="text" class="form-control" style="height: 25px;" value=""></td>
-									<td class="text-center"><input name="sale_price_1" type="text" class="form-control" style="height: 25px;" value=""></td>
-									<td class="text-center"><input name="main_capital_1" type="text" class="form-control" style="height: 25px;" value=""></td>
-									<td class="text-center"><input name="sub_capital_1" type="text" class="form-control" style="height: 25px;" value=""></td>
-									<td class="text-center"><input name="baht_1" type="text" class="form-control" style="height: 25px;" value=""></td>
-									<td class="text-center"><input name="percent_1" type="text" class="form-control" style="height: 25px;" value=""></td>
-									<td class="text-center"><input name="product_category_1" type="text" class="form-control" style="height: 25px;" value=""></td>
-									<td class="text-center"><input name="supplier_code_1" type="text" class="form-control" style="height: 25px;" value=""></td>
-									<td class="text-center"><input name="supplier_name_1" type="text" class="form-control" style="height: 25px;" value=""></td>
-									<td class="text-center"><input name="brand_1" type="text" class="form-control" style="height: 25px;" value=""></td>
-									<td class="text-center"><input name="is_take_back_1" type="radio" ></td>
-									<td class="text-center"><input name="is_take_back_1" type="radio" ></td>
-									<td class="text-center"><input name="delivery_branch_1" type="text" class="form-control" style="height: 25px;" value=""></td>
-									<td class="text-center"><input name="delivery_schedule_1" type="text" class="form-control" style="height: 25px;" value=""></td>
-									<td class="text-center">
-										<span class="badge bg-green detail" style="cursor: pointer;" data="ADD" data_id="1" onclick="add()">เพิ่ม</span> 
-									</td>
-								</tr>
-							</tbody>
-						</table>
+							<table id="myTable" class="table table-bordered" style="width: 2500px;max-width: none;">
+								<thead style="font-size: 14px;">
+									<tr class="bg-light-blue disabled ">
+										<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2">รหัสสินค้า</th>
+										<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2">รหัสบาร์โคด</th>
+										<th style="width: 200px;text-align: center;vertical-align: middle;" rowspan="2">ชื่อสินค้า</th>
+										<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2">ขนาดบรรจุ</th>
+										<th style="width: 100px;text-align: center;vertical-align: middle;" colspan="2">หน่วยหลัก/ย่อย</th>
+										<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2">ราคาขาย</th>
+										<th style="width: 150px;text-align: center;vertical-align: middle;" colspan="2">ราคาทุน</th>
+										<th style="width: 100px;text-align: center;vertical-align: middle;" colspan="2">GP</th>
+										<th style="width: 150px;text-align: center;vertical-align: middle;" rowspan="2">หมวดสินค้า</th>
+										<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2">รหัสผู้จำหน่าย</th>
+										<th style="width: 200px;text-align: center;vertical-align: middle;" rowspan="2">ชื่อผู้จำหน่าย</th>
+										<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2">ยี่ห้อ</th>
+										<th style="width: 200px;text-align: center;vertical-align: middle;" colspan="2">เงื่อนไขทางการค้า</th>
+										<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2">สาขาที่ส่งสินค้า</th>
+										<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2">กำหนดส่งสินค้า</th>
+										<th style="width: 100px;text-align: center;vertical-align: middle;" rowspan="2"></th>
+									</tr>
+									<tr class="bg-light-blue disabled ">
+										<th style="text-align: center;vertical-align: middle;">หีบ</th>
+										<th style="text-align: center;vertical-align: middle;">มัด</th>
+										<th style="text-align: center;vertical-align: middle;">ทุนหลัก</th>
+										<th style="text-align: center;vertical-align: middle;">ทุนย่อย</th>
+										<th style="text-align: center;vertical-align: middle;">(บาท)</th>
+										<th style="text-align: center;vertical-align: middle;">(%)</th>
+										<th style="text-align: center;vertical-align: middle;">รับคืน</th>
+										<th style="text-align: center;vertical-align: middle;">ไม่รับคืน</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr id="row_1">
+										<td class="text-center"><input name="product_code_1" type="text" class="form-control" style="height: 25px;" value=""></td>
+										<td class="text-center"><input name="product_barcode_1" type="text" class="form-control" style="height: 25px;" value=""></td>
+										<td class="text-center"><input name="product_name_1" type="text" class="form-control" style="height: 25px;" value=""></td>
+										<td class="text-center"><input name="contain_1" type="text" class="form-control" style="height: 25px;" value=""></td>
+										<td class="text-center"><input name="chest_1" type="text" class="form-control" style="height: 25px;" value=""></td>
+										<td class="text-center"><input name="bundle_1" type="text" class="form-control" style="height: 25px;" value=""></td>
+										<td class="text-center"><input name="sale_price_1" type="text" class="form-control" style="height: 25px;" value=""></td>
+										<td class="text-center"><input name="main_capital_1" type="text" class="form-control" style="height: 25px;" value=""></td>
+										<td class="text-center"><input name="sub_capital_1" type="text" class="form-control" style="height: 25px;" value=""></td>
+										<td class="text-center"><input name="baht_1" type="text" class="form-control" style="height: 25px;" value=""></td>
+										<td class="text-center"><input name="percent_1" type="text" class="form-control" style="height: 25px;" value=""></td>
+										<td class="text-center"><input name="product_category_1" type="text" class="form-control" style="height: 25px;" value=""></td>
+										<td class="text-center"><input name="supplier_code_1" type="text" class="form-control" style="height: 25px;" value=""></td>
+										<td class="text-center"><input name="supplier_name_1" type="text" class="form-control" style="height: 25px;" value=""></td>
+										<td class="text-center"><input name="brand_1" type="text" class="form-control" style="height: 25px;" value=""></td>
+										<td class="text-center"><input name="is_take_back_1" type="radio" value="true" checked="checked"></td>
+										<td class="text-center"><input name="is_take_back_1" type="radio" value="false"></td>
+										<td class="text-center"><input name="delivery_branch_1" type="text" class="form-control" style="height: 25px;" value=""></td>
+										<td class="text-center"><input name="delivery_schedule_1" type="text" class="form-control" style="height: 25px;" value=""></td>
+										<td class="text-center">
+											<span class="badge bg-green detail" style="cursor: pointer;" data="ADD" data_id="1" onclick="add()">เพิ่ม</span> 
+										</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
+				<div class="box">
+						<div class="box-header with-border">
+							<h3 class="box-title">ข้อมูลการอนุมัติ</h3>
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body">
+							<div class="table-responsive">
+								<table style="width: 100%">
+									<tr>
+										<td class="col-xs-4">
+											<table style="width: 100%" class="table table-bordered" >
+												<tr>
+													<td align="center" colspan="2" style="font-size: 14px;font-weight: bold;">ผู้จัดทำ</td>
+												</tr>
+												<tr>
+													<td align="center" >
+														<img src="${users.getUrl_img()}"  height="100px" width="100px">
+													</td>
+													<td align="center" >
+														<table>
+															<tr><td align="center" ><img src="${users.getUrl_signature()}"  height="50px" width="100px"><br><br></td></tr>
+															<tr><td align="center"  style="font-size: 12px;">${users.getName()}<br><b>ตำแหน่ง</b> ${users.getPosition()}</td></tr>
+														</table>
+													</td>
+												</tr>
+												<tr>
+													<td align="center" colspan="2" style="font-size: 14px;">วันที่เวลา : ${command.timeadd_date_th} ${command.timeadd_time} </td>
+												</tr>
+											</table>
+										</td>
+										<td class="col-xs-4" id="check">
+											<table style="width: 100%" class="table table-bordered" >
+												<tr>
+													<td align="center" colspan="2" style="font-size: 14px;font-weight: bold;">ผู้ตรวจทาน</td>
+												</tr>
+												<tr>
+													<td align="center" ><img src="${pageContext.request.contextPath}/assets/img/avatarNull.png"  height="115px" width="100px" data-toggle="modal" data-target="#popup_check" style="cursor: pointer;"><br><br></td>													
+												</tr>
+											</table>
+										</td>
+										<td class="col-xs-4" id="approve">
+											<table style="width: 100%" class="table table-bordered" >
+												<tr>
+													<td align="center" colspan="2" style="font-size: 14px;font-weight: bold;">ผู้อนนุมัติ</td>
+												</tr>
+												<tr>
+													<td align="center" ><img src="${pageContext.request.contextPath}/assets/img/avatarNull.png"  height="115px" width="100px"  data-toggle="modal" data-target="#popup_approve" style="cursor: pointer;"><br><br></td>													
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</div>
+					</div>
+				</div>
+
 				<!-- /.box-body -->
 			  <div class="box-footer">
 				<button type="submit" class="btn btn-default">Cancel</button>
@@ -458,6 +532,56 @@
 		  <!-- /.box-footer -->
 		</form>
 	  
+	  <!-- POPUP -->
+  	<div id="popup_approve" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+	    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">รายชื่อ</h4>
+		      </div>
+		      <div class="modal-body">
+		        <table class="table table-striped table-bordered table-hover" style="margin-top: 5px;">
+	             	<thead>
+	                	<tr>
+	                    	<th width="10%">#</th>
+							<th width="90%">ชื่อ</th>
+	                    </tr>
+	                 </thead>
+	                 <tbody id="list_approve">
+	                 
+	                 </tbody>
+	             </table>
+		      </div>
+		    </div>
+		</div>
+	</div>
+	
+  	<div id="popup_check" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+	    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">รายชื่อ</h4>
+		      </div>
+		      <div class="modal-body">
+		        <table class="table table-striped table-bordered table-hover" style="margin-top: 5px;">
+	             	<thead>
+	                	<tr>
+	                    	<th width="10%">#</th>
+							<th width="90%">ชื่อ</th>
+	                    </tr>
+	                 </thead>
+	                 <tbody id="list_check">
+	                 
+	                 </tbody>
+	             </table>
+		      </div>
+		    </div>
+		</div>
+	</div>
 
     </section>
 	<!-- /.modal -->
@@ -629,10 +753,68 @@
 					$('input[name=copy_vat_certificate_individual]').val('false');
 				}
 			});
-			
-			$(".detail").click(function(){
-				
+
+			$('#popup_approve').on('show.bs.modal', function () {
+				var objFormJSP = new Object();
+				objFormJSP.action = "APPROVE";
+				$.ajax({
+					url: "${pageContext.request.contextPath}/list_approve.htm",
+					type: 'POST',
+					dataType: 'json',
+					data: JSON.stringify(objFormJSP),
+					contentType: 'application/json',
+					mimeType: 'application/json',
+					
+					success: function (data) {
+						$("#list_approve tr").remove();
+						var loop = 1;
+			        	$.each(data, function (index, users) {
+			        		var str = '"'+users.name+'","'+users.position+'","'+users.url_img+'"';
+			                $("#list_approve").append($('<tr/>')
+			                							.append($('<td/>').html("<span>"+loop+".</span>"))
+			                							.append($('<td/>').html("<span onclick='on_select_approve("+str+")' style='cursor: pointer;'>"+users.name+"</span>"))
+			                							);
+			                
+			                loop++;
+			        	});
+			        },
+					error:function(data,status,er) {
+						alert("error: "+data+" status: "+status+" er:"+er);
+					}
+				});
 			});
+
+			$('#popup_check').on('show.bs.modal', function () {
+				var objFormJSP = new Object();
+				objFormJSP.action = "CHECK";
+				$.ajax({
+					url: "${pageContext.request.contextPath}/list_approve.htm",
+					type: 'POST',
+					dataType: 'json',
+					data: JSON.stringify(objFormJSP),
+					contentType: 'application/json',
+					mimeType: 'application/json',
+					
+					success: function (data) {
+						$("#list_check tr").remove();
+						var loop = 1;
+			        	$.each(data, function (index, users) {
+			        		var str = '"'+users.name+'","'+users.position+'","'+users.url_img+'"';
+			                $("#list_check").append($('<tr/>')
+			                							.append($('<td/>').html("<span>"+loop+".</span>"))
+			                							.append($('<td/>').html("<span onclick='on_select_check("+str+")' style='cursor: pointer;'>"+users.name+"</span>"))
+			                							);
+			                
+			                loop++;
+			        	});
+			        },
+					error:function(data,status,er) {
+						alert("error: "+data+" status: "+status+" er:"+er);
+					}
+				});
+			});
+			
+			
 		});
 		
 		var loop = 2;
@@ -654,8 +836,8 @@
 			html += '<td class="text-center"><input name="supplier_code_'+loop+'" type="text" class="form-control" style="height: 25px;" value=""></td>';
 			html += '<td class="text-center"><input name="supplier_name_'+loop+'" type="text" class="form-control" style="height: 25px;" value=""></td>';
 			html += '<td class="text-center"><input name="brand_'+loop+'" type="text" class="form-control" style="height: 25px;" value=""></td>';
-			html += '<td class="text-center"><input name="is_take_back_'+loop+'" type="radio" ></td>';
-			html += '<td class="text-center"><input name="is_take_back_'+loop+'" type="radio" ></td>';
+			html += '<td class="text-center"><input name="is_take_back_'+loop+'" type="radio" value="true" checked="checked"></td>';
+			html += '<td class="text-center"><input name="is_take_back_'+loop+'" type="radio" value="false"></td>';
 			html += '<td class="text-center"><input name="delivery_branch_'+loop+'" type="text" class="form-control" style="height: 25px;" value=""></td>';
 			html += '<td class="text-center"><input name="delivery_schedule_'+loop+'" type="text" class="form-control" style="height: 25px;" value=""></td>';
 			html += '<td class="text-center">';
@@ -676,6 +858,102 @@
 		    var row = document.getElementById(rowid);
 		    row.parentNode.removeChild(row);
 		}
+		
+		function on_select_approve(name, position, url_img){
+			set_approve(name, position, url_img);
+			$('#popup_approve').modal('hide');
+		}
+		
+		function set_approve(name, position, url_img){
+			var html = '';
+			html += '<table style="width: 100%" class="table table-bordered" >';
+			html += '<tr>';
+			html += '<td align="center" colspan="2" style="font-size: 14px;font-weight: bold;">';
+			html += 'ผู้อนนุมัติ';
+			html += '&nbsp&nbsp<span class="badge bg-red detail" style="cursor: pointer;" onclick="delete_approve()">x</span>';
+			html += '</td>';
+			html += '</tr>';
+			html += '<tr>';
+			html += '<td align="center" >';
+			html += '<img src="'+url_img+'"  height="100px" width="100px">';
+			html += '</td>';
+			html += '<td align="center" >';
+			html += '<table>';
+			html += '<tr><td align="center" ><img src="${pageContext.request.contextPath}/assets/img/sigNull.png"  height="50px" width="100px"><br><br></td></tr>';
+			html += '<tr><td align="center"  style="font-size: 12px;">'+name+'<br><b>ตำแหน่ง</b> '+position+'</td></tr>';
+			html += '</table>';
+			html += '</td>';
+			html += '</tr>';
+			html += '<tr>';
+			html += '<td align="center" colspan="2" style="font-size: 14px;">วันที่เวลา : </td>';
+			html += '</tr>';
+			html += '</table>';
+			
+			$('#approve').html(html);
+		}
+		
+		function delete_approve(){
+			var html = '';
+			html += '<table style="width: 100%" class="table table-bordered" >';
+			html += '<tr>';
+			html += '<td align="center" colspan="2" style="font-size: 14px;font-weight: bold;">ผู้อนนุมัติ</td>';
+			html += '</tr>';
+			html += '<tr>';
+			html += '<td align="center" ><img src="${pageContext.request.contextPath}/assets/img/avatarNull.png"  height="115px" width="100px"  data-toggle="modal" data-target="#popup_approve" style="cursor: pointer;"><br><br></td>';									
+			html += '</tr>';
+			html += '</table>';
+			
+			$('#approve').html(html);
+		}
+		
+		function on_select_check(name, position, url_img){
+			set_check(name, position, url_img);
+			$('#popup_check').modal('hide');
+		}
+		
+		function set_check(name, position, url_img){
+			var html = '';
+			html += '<table style="width: 100%" class="table table-bordered" >';
+			html += '<tr>';
+			html += '<td align="center" colspan="2" style="font-size: 14px;font-weight: bold;">';
+			html += 'ผู้อนนุมัติ';
+			html += '&nbsp&nbsp<span class="badge bg-red detail" style="cursor: pointer;" onclick="delete_check()">x</span>';
+			html += '</td>';
+			html += '</tr>';
+			html += '<tr>';
+			html += '<td align="center" >';
+			html += '<img src="'+url_img+'"  height="100px" width="100px">';
+			html += '</td>';
+			html += '<td align="center" >';
+			html += '<table>';
+			html += '<tr><td align="center" ><img src="${pageContext.request.contextPath}/assets/img/sigNull.png"  height="50px" width="100px"><br><br></td></tr>';
+			html += '<tr><td align="center"  style="font-size: 12px;">'+name+'<br>ตำแหน่ง '+position+'</td></tr>';
+			html += '</table>';
+			html += '</td>';
+			html += '</tr>';
+			html += '<tr>';
+			html += '<td align="center" colspan="2" style="font-size: 14px;">วันที่เวลา : </td>';
+			html += '</tr>';
+			html += '</table>';
+			
+			$('#check').html(html);
+		}
+		
+		function delete_check(){
+			var html = '';
+			html += '<table style="width: 100%" class="table table-bordered" >';
+			html += '<tr>';
+			html += '<td align="center" colspan="2" style="font-size: 14px;font-weight: bold;">ผู้อนนุมัติ</td>';
+			html += '</tr>';
+			html += '<tr>';
+			html += '<td align="center" ><img src="${pageContext.request.contextPath}/assets/img/avatarNull.png"  height="115px" width="100px"  data-toggle="modal" data-target="#popup_check" style="cursor: pointer;"><br><br></td>';									
+			html += '</tr>';
+			html += '</table>';
+			
+			$('#check').html(html);
+		}
+		
+		
 	</script>
     
 <%@ include file="../../footer.jsp" %>

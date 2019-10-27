@@ -1,7 +1,8 @@
-package application.Dao;
+package application.Dao.master;
 
 import java.util.List;
 
+import application.Dao.Dao;
 import application.model.master.Users;
 
 public class UsersDao extends Dao{
@@ -15,5 +16,11 @@ public class UsersDao extends Dao{
 		String codition = "username = '" + username + "' and password = '" + password + "'";
 		List<Object> list = this.getByWhere(codition);
 		return list.size() > 0 ? list.get(0) : null;
+	}
+	
+	public List<Object> getByOrgCode(String org_code) {
+		String codition = "org_code = '" + org_code + "'";
+		List<Object> list = this.getByWhere(codition);
+		return list;
 	}
 }

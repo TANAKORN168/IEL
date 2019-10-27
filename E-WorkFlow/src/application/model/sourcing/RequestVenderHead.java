@@ -2,9 +2,14 @@ package application.model.sourcing;
 
 import java.util.List;
 
+import application.model.master.StatusInfo;
+import application.service.utility.MyDate;
+
 public class RequestVenderHead {
 
 	private int id;
+	private String status_code;
+	private String status_name;
 	private String request_vender_code;//เลขที่ใบขอ
 	private String vender_code;//เลขที่ผู้ประกอบการ
 	private String vender_ref_code;//เลขที่อ้างอิงผู้ประกอบการ
@@ -63,7 +68,10 @@ public class RequestVenderHead {
     private String timeupd_time;
     private String timeupd_user;
     
+    private String timeadd_date_th;
+    
     private List<RequestVenderDetail> details;
+    private List<StatusInfo> list_status;
     
 	public int getId() {
 		return id;
@@ -71,6 +79,22 @@ public class RequestVenderHead {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getStatus_code() {
+		return status_code;
+	}
+
+	public void setStatus_code(String status_code) {
+		this.status_code = status_code;
+	}
+
+	public String getStatus_name() {
+		return status_name;
+	}
+
+	public void setStatus_name(String status_name) {
+		this.status_name = status_name;
 	}
 
 	public String getRequest_vender_code() {
@@ -519,6 +543,23 @@ public class RequestVenderHead {
 
 	public void setDetails(List<RequestVenderDetail> details) {
 		this.details = details;
+	}
+
+	public String getTimeadd_date_th() {
+		timeadd_date_th = MyDate.STOD(this.timeadd_date);
+		return timeadd_date_th;
+	}
+
+	public void setTimeadd_date_th(String timeadd_date_th) {
+		this.timeadd_date_th = timeadd_date_th;
+	}
+
+	public List<StatusInfo> getList_status() {
+		return list_status;
+	}
+
+	public void setList_status(List<StatusInfo> list_status) {
+		this.list_status = list_status;
 	}
 
 }

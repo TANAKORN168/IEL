@@ -84,7 +84,7 @@
           <img src="${users.getUrl_img()}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>${users.getName()}</p>
+          <p style="font-size: 12px;">${users.getName()}</p>
           <i class="fa fa-circle text-success"></i> <span style="color:#3498DB">${users.getPosition()}</span>
         </div>
       </div>

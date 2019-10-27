@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import application.manager.UsersManager;
+import application.manager.master.UsersManager;
 import application.model.master.Users;
 
 @Controller

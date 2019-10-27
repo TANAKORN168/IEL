@@ -1,5 +1,6 @@
-package application.Dao;
+package application.Dao.master;
 
+import application.Dao.Dao;
 import application.model.master.Company;
 
 public class CompanyDao extends Dao{

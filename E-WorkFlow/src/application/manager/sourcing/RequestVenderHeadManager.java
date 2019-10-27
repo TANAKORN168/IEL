@@ -1,8 +1,8 @@
-package application.manager;
+package application.manager.sourcing;
 
 import java.util.List;
 
-import application.Dao.RequestVenderHeadDao;
+import application.Dao.sourcing.RequestVenderHeadDao;
 import application.model.sourcing.RequestVenderHead;
 
 public class RequestVenderHeadManager {

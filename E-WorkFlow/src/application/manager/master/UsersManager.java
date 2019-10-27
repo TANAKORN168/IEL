@@ -1,10 +1,11 @@
-package application.manager;
+package application.manager.master;
 
 import java.util.List;
 
-import application.Dao.UsersDao;
+import application.Dao.master.UsersDao;
 import application.model.master.Users;
 
+@SuppressWarnings("unchecked")
 public class UsersManager {
 
 	private UsersDao dao;
@@ -13,13 +14,16 @@ public class UsersManager {
 		this.dao = new UsersDao();
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Users> getByAll() {
 		return (List<Users>)(Object)this.dao.getByAll();
 	}
 	
 	public Users getByUsernamePassword(String username, String password) {
 		return (Users) this.dao.getByUsernamePassword(username, password);
+	}
+	
+	public List<Users> getByOrgCode(String org_code) {
+		return (List<Users>)(Object)this.dao.getByOrgCode(org_code);
 	}
 	
 	public int add(Users Users) {
