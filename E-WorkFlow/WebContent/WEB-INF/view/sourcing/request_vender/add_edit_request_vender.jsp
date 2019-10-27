@@ -19,6 +19,12 @@
 				 <input name="timeupd_time" type="hidden"  value="${command.timeupd_time}">
 				 <input name="timeupd_user" type="hidden"  value="${command.timeupd_user}">
 				 <input id="last_row" name="last_row" type="hidden"  value="1">
+				 
+				 <input id="select_id" type="hidden"  value="">
+				 <input id="select_level" type="hidden"  value="">
+				 <input id="select_title" type="hidden"  value="">
+				 <input id="select_users_id" type="hidden"  value="">
+				 <input id="select_status_code" type="hidden"  value="">
 			</div>
 			<div class="row">
 				<div class="col-lg-12 col-xs-12">
@@ -50,16 +56,22 @@
 							</div>
 							<div class="row">
 								<div class="col-xs-12">
-									<div class="col-md-3" style="font-size: 16px;font-weight: bold;">เลขที่ใบขอ ${RequestVender.getRequest_vender_code()}</div>
+									<div class="col-md-3" style="font-size: 16px;"><b>เลขที่ใบขอ</b> ${command.request_vender_code}</div>
 									<div class="col-md-5"></div>
-									<div class="col-md-4" style="font-size: 16px;font-weight: bold;">รหัสผู้จำหน่าย ${RequestVender.getVender_code()}</div>
+									<div class="col-md-4" style="font-size: 16px;">
+										<div class="col-md-5"  style="padding-right: 0px;"><b>รหัสผู้จำหน่าย</b></div>
+										<div class="col-md-7"  style="padding-left: 0px;">&nbsp&nbsp${command.vender_code}</div>
+									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-xs-12">
-									<div class="col-md-3" style="font-size: 16px;font-weight: bold;">วันที่ ${RequestVender.getRequest_vender_date()}</div>
+									<div class="col-md-3" style="font-size: 16px;"><b>วันที่</b> ${command.request_vender_date}</div>
 									<div class="col-md-5"></div>
-									<div class="col-md-4" style="font-size: 16px;font-weight: bold;">รหัสอ้างอิง ${RequestVender.getVender_ref_code()}</div>
+									<div class="col-md-4" style="font-size: 16px;">
+										<div class="col-md-5"  style="padding-right: 0px;"><b>รหัสอ้างอิง</b></div> 
+										<div class="col-md-7"  style="padding-left: 0px;"><input name="vender_ref_code" type="text" class="form-control" style="height: 25px; width: 150px;" value="${command.vender_ref_code}"></div>
+									</div>
 								</div>
 							</div>
 							<div class="row">
@@ -468,61 +480,19 @@
 					</div>
 				</div>
 				<div class="box">
-						<div class="box-header with-border">
-							<h3 class="box-title">ข้อมูลการอนุมัติ</h3>
+					<div class="box-header with-border">
+						<h3 class="box-title">ข้อมูลการอนุมัติ</h3>
+					</div>
+					<div class="box-body">
+						<div class="table-responsive">
+							<table style="width: 100%">
+								<tr id="list_approve">
+
+								</tr>
+							</table>
 						</div>
-						<!-- /.box-header -->
-						<div class="box-body">
-							<div class="table-responsive">
-								<table style="width: 100%">
-									<tr>
-										<td class="col-xs-4">
-											<table style="width: 100%" class="table table-bordered" >
-												<tr>
-													<td align="center" colspan="2" style="font-size: 14px;font-weight: bold;">ผู้จัดทำ</td>
-												</tr>
-												<tr>
-													<td align="center" >
-														<img src="${users.getUrl_img()}"  height="100px" width="100px">
-													</td>
-													<td align="center" >
-														<table>
-															<tr><td align="center" ><img src="${users.getUrl_signature()}"  height="50px" width="100px"><br><br></td></tr>
-															<tr><td align="center"  style="font-size: 12px;">${users.getName()}<br><b>ตำแหน่ง</b> ${users.getPosition()}</td></tr>
-														</table>
-													</td>
-												</tr>
-												<tr>
-													<td align="center" colspan="2" style="font-size: 14px;">วันที่เวลา : ${command.timeadd_date_th} ${command.timeadd_time} </td>
-												</tr>
-											</table>
-										</td>
-										<td class="col-xs-4" id="check">
-											<table style="width: 100%" class="table table-bordered" >
-												<tr>
-													<td align="center" colspan="2" style="font-size: 14px;font-weight: bold;">ผู้ตรวจทาน</td>
-												</tr>
-												<tr>
-													<td align="center" ><img src="${pageContext.request.contextPath}/assets/img/avatarNull.png"  height="115px" width="100px" data-toggle="modal" data-target="#popup_check" style="cursor: pointer;"><br><br></td>													
-												</tr>
-											</table>
-										</td>
-										<td class="col-xs-4" id="approve">
-											<table style="width: 100%" class="table table-bordered" >
-												<tr>
-													<td align="center" colspan="2" style="font-size: 14px;font-weight: bold;">ผู้อนนุมัติ</td>
-												</tr>
-												<tr>
-													<td align="center" ><img src="${pageContext.request.contextPath}/assets/img/avatarNull.png"  height="115px" width="100px"  data-toggle="modal" data-target="#popup_approve" style="cursor: pointer;"><br><br></td>													
-												</tr>
-											</table>
-										</td>
-									</tr>
-								</table>
-							</div>
 					</div>
 				</div>
-
 				<!-- /.box-body -->
 			  <div class="box-footer">
 				<button type="submit" class="btn btn-default">Cancel</button>
@@ -549,32 +519,7 @@
 							<th width="90%">ชื่อ</th>
 	                    </tr>
 	                 </thead>
-	                 <tbody id="list_approve">
-	                 
-	                 </tbody>
-	             </table>
-		      </div>
-		    </div>
-		</div>
-	</div>
-	
-  	<div id="popup_check" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-	    <!-- Modal content-->
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal">&times;</button>
-		        <h4 class="modal-title">รายชื่อ</h4>
-		      </div>
-		      <div class="modal-body">
-		        <table class="table table-striped table-bordered table-hover" style="margin-top: 5px;">
-	             	<thead>
-	                	<tr>
-	                    	<th width="10%">#</th>
-							<th width="90%">ชื่อ</th>
-	                    </tr>
-	                 </thead>
-	                 <tbody id="list_check">
+	                 <tbody id="list_popup_approve">
 	                 
 	                 </tbody>
 	             </table>
@@ -587,6 +532,14 @@
 	<!-- /.modal -->
 	<script>
 		$(document).ready(function() {
+			
+			var list = ${list_status_movement};
+			$.each(list, function( index, status_movement ) {
+				if(status_movement.approve){
+					set_approve1(null, status_movement.status_name, status_movement.users_name, status_movement.users_position, status_movement.users_url_pic, status_movement.users_url_sig, status_movement.date_time, status_movement.level, status_movement.users_id, status_movement.status_code);
+				}
+			});
+			
 			$('input:radio[name=legal_entity]').change(function () {
 				 if ($('input:radio[name=legal_entity]:checked').val() == 'true') {
 					 $('input[name=copy_company_registration]').removeAttr("disabled");
@@ -756,7 +709,8 @@
 
 			$('#popup_approve').on('show.bs.modal', function () {
 				var objFormJSP = new Object();
-				objFormJSP.action = "APPROVE";
+				var level = $("#select_level").val();
+				objFormJSP.level = level;
 				$.ajax({
 					url: "${pageContext.request.contextPath}/list_approve.htm",
 					type: 'POST',
@@ -766,11 +720,11 @@
 					mimeType: 'application/json',
 					
 					success: function (data) {
-						$("#list_approve tr").remove();
+						$("#list_popup_approve tr").remove();
 						var loop = 1;
 			        	$.each(data, function (index, users) {
-			        		var str = '"'+users.name+'","'+users.position+'","'+users.url_img+'"';
-			                $("#list_approve").append($('<tr/>')
+			        		var str = '"'+users.name+'","'+users.position+'","'+users.url_img+'","'+users.id+'"';
+			                $("#list_popup_approve").append($('<tr/>')
 			                							.append($('<td/>').html("<span>"+loop+".</span>"))
 			                							.append($('<td/>').html("<span onclick='on_select_approve("+str+")' style='cursor: pointer;'>"+users.name+"</span>"))
 			                							);
@@ -783,37 +737,6 @@
 					}
 				});
 			});
-
-			$('#popup_check').on('show.bs.modal', function () {
-				var objFormJSP = new Object();
-				objFormJSP.action = "CHECK";
-				$.ajax({
-					url: "${pageContext.request.contextPath}/list_approve.htm",
-					type: 'POST',
-					dataType: 'json',
-					data: JSON.stringify(objFormJSP),
-					contentType: 'application/json',
-					mimeType: 'application/json',
-					
-					success: function (data) {
-						$("#list_check tr").remove();
-						var loop = 1;
-			        	$.each(data, function (index, users) {
-			        		var str = '"'+users.name+'","'+users.position+'","'+users.url_img+'"';
-			                $("#list_check").append($('<tr/>')
-			                							.append($('<td/>').html("<span>"+loop+".</span>"))
-			                							.append($('<td/>').html("<span onclick='on_select_check("+str+")' style='cursor: pointer;'>"+users.name+"</span>"))
-			                							);
-			                
-			                loop++;
-			        	});
-			        },
-					error:function(data,status,er) {
-						alert("error: "+data+" status: "+status+" er:"+er);
-					}
-				});
-			});
-			
 			
 		});
 		
@@ -859,98 +782,106 @@
 		    row.parentNode.removeChild(row);
 		}
 		
-		function on_select_approve(name, position, url_img){
-			set_approve(name, position, url_img);
+		function on_select_approve(name, position, url_pic, users_id){
+			var select_id = document.getElementById("select_id").value;
+			var select_level = document.getElementById("select_level").value;
+			var select_title = document.getElementById("select_title").value;
+			var select_status_code = document.getElementById("select_status_code").value;
+			set_approve1(select_id, select_title, name, position, url_pic, "assets/img/sigNull.png", "", select_level, users_id, select_status_code);
 			$('#popup_approve').modal('hide');
 		}
 		
-		function set_approve(name, position, url_img){
-			var html = '';
-			html += '<table style="width: 100%" class="table table-bordered" >';
-			html += '<tr>';
-			html += '<td align="center" colspan="2" style="font-size: 14px;font-weight: bold;">';
-			html += 'ผู้อนนุมัติ';
-			html += '&nbsp&nbsp<span class="badge bg-red detail" style="cursor: pointer;" onclick="delete_approve()">x</span>';
-			html += '</td>';
-			html += '</tr>';
-			html += '<tr>';
-			html += '<td align="center" >';
-			html += '<img src="'+url_img+'"  height="100px" width="100px">';
-			html += '</td>';
-			html += '<td align="center" >';
-			html += '<table>';
-			html += '<tr><td align="center" ><img src="${pageContext.request.contextPath}/assets/img/sigNull.png"  height="50px" width="100px"><br><br></td></tr>';
-			html += '<tr><td align="center"  style="font-size: 12px;">'+name+'<br><b>ตำแหน่ง</b> '+position+'</td></tr>';
-			html += '</table>';
-			html += '</td>';
-			html += '</tr>';
-			html += '<tr>';
-			html += '<td align="center" colspan="2" style="font-size: 14px;">วันที่เวลา : </td>';
-			html += '</tr>';
-			html += '</table>';
-			
-			$('#approve').html(html);
+		function delete_approve(approve_id, title, level, status_code){
+			set_approve1(approve_id, title, null, null, null, null, null, level, 0, status_code);
 		}
 		
-		function delete_approve(){
-			var html = '';
-			html += '<table style="width: 100%" class="table table-bordered" >';
-			html += '<tr>';
-			html += '<td align="center" colspan="2" style="font-size: 14px;font-weight: bold;">ผู้อนนุมัติ</td>';
-			html += '</tr>';
-			html += '<tr>';
-			html += '<td align="center" ><img src="${pageContext.request.contextPath}/assets/img/avatarNull.png"  height="115px" width="100px"  data-toggle="modal" data-target="#popup_approve" style="cursor: pointer;"><br><br></td>';									
-			html += '</tr>';
-			html += '</table>';
+		function select(id, level, title, status_code){
+			var select_id = document.getElementById("select_id");
+			select_id.value = id;
 			
-			$('#approve').html(html);
-		}
-		
-		function on_select_check(name, position, url_img){
-			set_check(name, position, url_img);
-			$('#popup_check').modal('hide');
-		}
-		
-		function set_check(name, position, url_img){
-			var html = '';
-			html += '<table style="width: 100%" class="table table-bordered" >';
-			html += '<tr>';
-			html += '<td align="center" colspan="2" style="font-size: 14px;font-weight: bold;">';
-			html += 'ผู้อนนุมัติ';
-			html += '&nbsp&nbsp<span class="badge bg-red detail" style="cursor: pointer;" onclick="delete_check()">x</span>';
-			html += '</td>';
-			html += '</tr>';
-			html += '<tr>';
-			html += '<td align="center" >';
-			html += '<img src="'+url_img+'"  height="100px" width="100px">';
-			html += '</td>';
-			html += '<td align="center" >';
-			html += '<table>';
-			html += '<tr><td align="center" ><img src="${pageContext.request.contextPath}/assets/img/sigNull.png"  height="50px" width="100px"><br><br></td></tr>';
-			html += '<tr><td align="center"  style="font-size: 12px;">'+name+'<br>ตำแหน่ง '+position+'</td></tr>';
-			html += '</table>';
-			html += '</td>';
-			html += '</tr>';
-			html += '<tr>';
-			html += '<td align="center" colspan="2" style="font-size: 14px;">วันที่เวลา : </td>';
-			html += '</tr>';
-			html += '</table>';
+			var select_level = document.getElementById("select_level");
+			select_level.value = level;
 			
-			$('#check').html(html);
-		}
-		
-		function delete_check(){
-			var html = '';
-			html += '<table style="width: 100%" class="table table-bordered" >';
-			html += '<tr>';
-			html += '<td align="center" colspan="2" style="font-size: 14px;font-weight: bold;">ผู้อนนุมัติ</td>';
-			html += '</tr>';
-			html += '<tr>';
-			html += '<td align="center" ><img src="${pageContext.request.contextPath}/assets/img/avatarNull.png"  height="115px" width="100px"  data-toggle="modal" data-target="#popup_check" style="cursor: pointer;"><br><br></td>';									
-			html += '</tr>';
-			html += '</table>';
+			var select_title = document.getElementById("select_title");
+			select_title.value = title
 			
-			$('#check').html(html);
+			var select_status_code = document.getElementById("select_status_code");
+			select_status_code.value = status_code
+		}
+
+		var approve_loop = 1;
+		function set_approve1(id, title, name, position, url_pic, url_sig, date_time, level, users_id, status_code){
+			var html = '';
+			
+			var approve_id = "";
+			var users_id_approve = "";
+			var status_code_approve = "";
+			if(id == null){
+				approve_id = "'approve_"+approve_loop+"'";
+				users_id_approve = "'users_id_approve_"+approve_loop+"'";
+				status_code_approve = "'status_code_approve_"+approve_loop+"'";
+			}else{
+				approve_id = "'"+id +"'";
+				users_id_approve = "'users_id_"+id+"'";
+				status_code_approve = "'status_code_"+id+"'";
+			}
+			
+			var approve_title = "'"+title+"'";
+			var approve_level = "'"+level+"'";
+			var approve_users_id = "'"+users_id+"'";
+			var approve_status_code = "'"+status_code+"'";
+			var del_approve_id = "#"+id+"";
+			html += '<td class="col-xs-4" id='+approve_id+'>';
+			
+			html += '<input id="'+users_id_approve+'" type="hidden"  value="'+approve_users_id+'">';
+			html += '<input id="'+status_code_approve+'" type="hidden"  value="'+approve_status_code+'">';
+			
+			if(name == null){
+				html += '<table style="width: 100%" class="table table-bordered" >';
+				html += '<tr>';
+				html += '<td align="center" colspan="2" style="font-size: 14px;font-weight: bold;">'+title+'</td>';
+				html += '</tr>';
+				html += '<tr>';
+				html += '<td align="center" ><img src="${pageContext.request.contextPath}/assets/img/avatarNull.png"  height="115px" width="100px"  data-toggle="modal" data-target="#popup_approve" style="cursor: pointer;" onclick="select('+approve_id+','+approve_level+','+approve_title+', '+approve_status_code+')"><br><br></td>';									
+				html += '</tr>';
+				html += '</table>';
+			}else{
+				html += '<table style="width: 100%" class="table table-bordered" >';
+				html += '<tr>';
+				html += '<td align="center" colspan="2" style="font-size: 14px;font-weight: bold;">';
+				html += title;
+				
+				if(approve_loop > 1){
+					html += '&nbsp&nbsp<span class="badge bg-red detail" style="cursor: pointer;" onclick="delete_approve('+approve_id+', '+approve_title+', '+approve_level+', '+approve_status_code+')">x</span>';
+				}
+				
+				html += '</td>';
+				html += '</tr>';
+				html += '<tr>';
+				html += '<td align="center" >';
+				html += '<img src="'+url_pic+'"  height="100px" width="100px">';
+				html += '</td>';
+				html += '<td align="center" >';
+				html += '<table>';
+				html += '<tr><td align="center" ><img src="'+url_sig+'"  height="50px" width="100px"><br><br></td></tr>';
+				html += '<tr><td align="center"  style="font-size: 12px;">'+name+'<br>ตำแหน่ง '+position+'</td></tr>';
+				html += '</table>';
+				html += '</td>';
+				html += '</tr>';
+				html += '<tr>';
+				html += '<td align="center" colspan="2" style="font-size: 14px;">วันที่เวลา : ' + date_time + '</td>';
+				html += '</tr>';
+				html += '</table>';
+				html +='</td>';
+			}
+			
+			approve_loop++;
+			
+			if(id == null){
+				$('#list_approve').before(html);
+			}else{
+				$(del_approve_id).html(html);
+			}
 		}
 		
 		

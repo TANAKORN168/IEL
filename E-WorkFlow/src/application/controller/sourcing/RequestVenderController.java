@@ -23,6 +23,7 @@ import application.manager.master.StatusInfoManager;
 import application.manager.master.UsersManager;
 import application.model.ObjFormJSP;
 import application.model.master.StatusInfo;
+import application.model.master.StatusMovement;
 import application.model.master.Users;
 import application.model.sourcing.RequestVenderDetail;
 import application.model.sourcing.RequestVenderHead;
@@ -69,24 +70,44 @@ public class RequestVenderController {
     	requestVenderHead.setTimeupd_user(ss_users.getName());
     	
     	List<StatusInfo> list_status = this.statusInfoManager.getByMainCode("SC");
+    	List<StatusMovement> list_status_movement = new ArrayList<StatusMovement>();
+    	StatusMovement statusMovement;
+    	int loop = 1;
+    	for (StatusInfo statusInfo : list_status) {
+    		
+    		statusMovement = new StatusMovement();
+        	statusMovement.setHead_class(requestVenderHead.getClass().getName());
+        	statusMovement.setStatus_code(statusInfo.getStatus_code());
+        	statusMovement.setStatus_name(statusInfo.getStatus_name());
+        	statusMovement.setApprove(statusInfo.isApprove());
+        	statusMovement.setLevel(statusInfo.getLevel());
+        	
+        	if(loop == 1) {
+	        	statusMovement.setUsers_id(ss_users.getId());
+	        	statusMovement.setUsers_name(ss_users.getName());
+	        	statusMovement.setUsers_position(ss_users.getPosition());
+	        	statusMovement.setUsers_url_pic(ss_users.getUrl_img());
+	        	statusMovement.setUsers_url_sig(ss_users.getUrl_signature());
+	        	statusMovement.setStamp(true);
+	        	statusMovement.setDate_time(MyDate.STOD(MyDate.GetCurrentDate()) + " " + MyDate.GetCurrentTime());
+        	}
+	        	
+        	list_status_movement.add(statusMovement);
+        	loop++;
+		}
     	requestVenderHead.setList_status(list_status);
+    	requestVenderHead.setList_status_movement(list_status_movement);
     	
-    	
-    	
-    	List<RequestVenderDetail> list = new ArrayList<RequestVenderDetail>();
-    	RequestVenderDetail obj = new RequestVenderDetail();
-    	obj.setId(1);
-    	obj.setTimeupd_user("Jack");
-    	list.add(obj);
-    	
-    	obj = new RequestVenderDetail();
-    	obj.setId(2);
-    	obj.setTimeupd_user("Jack2");
-    	list.add(obj);
-    	
-    	requestVenderHead.setDetails(list);
+    	String json = "";
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			json = mapper.writeValueAsString(list_status_movement);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     	
     	model.addAttribute("command", requestVenderHead);
+    	model.addAttribute("list_status_movement", json);
     	
          return new ModelAndView("sourcing/request_vender/add_edit_request_vender");
     }
@@ -94,16 +115,6 @@ public class RequestVenderController {
     @RequestMapping(value="/add_edit_request_vender", method=RequestMethod.POST)
     public void save(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("command") RequestVenderHead requestVenderHead)
     {
-    	System.out.println("isCopy_company_registration = >" + requestVenderHead.isCopy_company_registration());
-    	System.out.println("iscopy_company_registration = >" + requestVenderHead.isCopy_company_registration());
-    	System.out.println("iscopy_company_certificate = >" + requestVenderHead.isCopy_company_registration());
-    	System.out.println("iscopy_vat_certificate = >" + requestVenderHead.isCopy_company_registration());
-    	System.out.println("ispower_of_attorney = >" + requestVenderHead.isCopy_company_registration());
-    	System.out.println("ishouse_registration_authorized = >" + requestVenderHead.isCopy_company_registration());
-    	System.out.println("iscopy_bank_statement = >" + requestVenderHead.isCopy_company_registration());
-    	System.out.println("iscopy_identification_authorized = >" + requestVenderHead.isCopy_company_registration());
-    	System.out.println("isother_specify = >" + requestVenderHead.isCopy_company_registration());
-    	
     	List<RequestVenderDetail> list_requestVenderDetail = new ArrayList<RequestVenderDetail>();
     	String str_last_row = request.getParameter("last_row");
     	int last_row = Integer.valueOf(str_last_row);
@@ -145,11 +156,11 @@ public class RequestVenderController {
 	    			ObjectMapper mapper = new ObjectMapper();
 	    			ObjFormJSP objFormJSP = mapper.readValue(json, ObjFormJSP.class);
 
-	    	    	if("APPROVE".equals(objFormJSP.getAction())) {
+	    	    	if("2".equals(objFormJSP.getLevel())) {
 	    	    		div = 2;
 	    	    	}
 	    	    	
-	    	    	if("CHECK".equals(objFormJSP.getAction())) {
+	    	    	if("1".equals(objFormJSP.getLevel())) {
 	    	    		div = 1;
 	    	    	}
 	    			

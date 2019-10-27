@@ -2,17 +2,19 @@ package application.model.master;
 
 public class StatusInfo {
 
-	private Integer id;
+	private int id;
 	private String main_code;
 	private String status_code;
 	private String status_name;
 	private String discription;
+	private boolean approve;//ต้องการอนุมัติ
+	private int level;
 	
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -46,6 +48,22 @@ public class StatusInfo {
 
 	public void setDiscription(String discription) {
 		this.discription = discription;
+	}
+
+	public boolean isApprove() {
+		return approve;
+	}
+
+	public void setApprove(boolean approve) {
+		this.approve = approve;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 }

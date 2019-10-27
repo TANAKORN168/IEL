@@ -41,10 +41,28 @@ public class MapObject <T>{
 		            	if("java.lang.String".equals(field_type)) {
 			                String value = rs.getString(field_name);
 			                field.set(dto, field.getType().getConstructor(String.class).newInstance(value));
-		            	}else{
+		            	}
+		            	
+		            	if("java.lang.Integer".equals(field_type)) {
 		            		Integer value = rs.getInt(field_name);
 		            		Class<?> type = MAP.containsKey(value.getClass()) ? MAP.get(value.getClass()) : value.getClass();
 			                field.set(dto, field.getType().getConstructor(type).newInstance(value));
+		            	}
+		            	
+		            	if("int".equals(field_type)) {
+		            		Integer value = rs.getInt(field_name);
+			                field.set(dto, value);
+		            	}
+		            	
+		            	if("java.lang.Boolean".equals(field_type)) {
+		            		Boolean value = rs.getBoolean(field_name);
+		            		Class<?> type = MAP.containsKey(value.getClass()) ? MAP.get(value.getClass()) : value.getClass();
+			                field.set(dto, field.getType().getConstructor(type).newInstance(value));
+		            	}
+		            	
+		            	if("boolean".equals(field_type)) {
+		            		Boolean value = rs.getBoolean(field_name);
+			                field.set(dto, value);
 		            	}
 		            } catch (Exception e) {
 		                e.printStackTrace();
@@ -81,7 +99,7 @@ public class MapObject <T>{
 	        for(Field field: fields) {
 	            String field_name = field.getName();
 	            String field_type = field.getType().getName();
-		        System.out.println(field_type + " : " +field_name);
+		        //System.out.println(field_type + " : " +field_name);
 		        
 		        if("id".equals(field_name)) continue;
 	            
@@ -89,7 +107,7 @@ public class MapObject <T>{
 	            	field_name = field_name + last_prefix;
 	            }
 
-		        System.out.println(field_type + " : " +field_name);
+		        //System.out.println(field_type + " : " +field_name);
 	            try{
 	            	String str = rs.getParameter(field_name);
 	            	

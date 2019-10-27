@@ -3,6 +3,7 @@ package application.model.sourcing;
 import java.util.List;
 
 import application.model.master.StatusInfo;
+import application.model.master.StatusMovement;
 import application.service.utility.MyDate;
 
 public class RequestVenderHead {
@@ -72,6 +73,7 @@ public class RequestVenderHead {
     
     private List<RequestVenderDetail> details;
     private List<StatusInfo> list_status;
+    private List<StatusMovement> list_status_movement;
     
 	public int getId() {
 		return id;
@@ -560,6 +562,14 @@ public class RequestVenderHead {
 
 	public void setList_status(List<StatusInfo> list_status) {
 		this.list_status = list_status;
+	}
+
+	public List<StatusMovement> getList_status_movement() {
+		return list_status_movement;
+	}
+
+	public void setList_status_movement(List<StatusMovement> list_status_movement) {
+		this.list_status_movement = list_status_movement;
 	}
 
 }
