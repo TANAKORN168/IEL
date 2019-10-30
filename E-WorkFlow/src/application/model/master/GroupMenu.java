@@ -1,6 +1,6 @@
 package application.model.master;
 
-public class Organization {
+public class GroupMenu {
 	private int id;
 	private String code;
 	private String name;

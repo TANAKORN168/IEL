@@ -2,26 +2,28 @@ package application.model.master;
 
 //ALTER TABLE master.users ADD COLUMN id SERIAL PRIMARY KEY;
 public class Users {
-	private Integer id;
+	private int id;
 	private String code;
 	private String name;
 	private String position;
 	private String url_img;
 	private String url_signature;
-	private Integer company_id;
-	private Integer work_line_id;
-	private Integer department_id;
-	private Integer section_id;
-	private Integer organization_id;
+	private int company_id;
+	private int work_line_id;
+	private int department_id;
+	private int section_id;
+	private int organization_id;
 	private String username;
 	private String password;
 	private String org_code;
+	private int level;
+	private String group_menu_code;
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -49,43 +51,43 @@ public class Users {
 		this.position = position;
 	}
 
-	public Integer getCompany_id() {
+	public int getCompany_id() {
 		return company_id;
 	}
 
-	public void setCompany_id(Integer company_id) {
+	public void setCompany_id(int company_id) {
 		this.company_id = company_id;
 	}
 
-	public Integer getWork_line_id() {
+	public int getWork_line_id() {
 		return work_line_id;
 	}
 
-	public void setWork_line_id(Integer work_line_id) {
+	public void setWork_line_id(int work_line_id) {
 		this.work_line_id = work_line_id;
 	}
 
-	public Integer getDepartment_id() {
+	public int getDepartment_id() {
 		return department_id;
 	}
 
-	public void setDepartment_id(Integer department_id) {
+	public void setDepartment_id(int department_id) {
 		this.department_id = department_id;
 	}
 
-	public Integer getSection_id() {
+	public int getSection_id() {
 		return section_id;
 	}
 
-	public void setSection_id(Integer section_id) {
+	public void setSection_id(int section_id) {
 		this.section_id = section_id;
 	}
 
-	public Integer getOrganization_id() {
+	public int getOrganization_id() {
 		return organization_id;
 	}
 
-	public void setOrganization_id(Integer organization_id) {
+	public void setOrganization_id(int organization_id) {
 		this.organization_id = organization_id;
 	}
 
@@ -127,6 +129,22 @@ public class Users {
 
 	public void setOrg_code(String org_code) {
 		this.org_code = org_code;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public String getGroup_menu_code() {
+		return group_menu_code;
+	}
+
+	public void setGroup_menu_code(String group_menu_code) {
+		this.group_menu_code = group_menu_code;
 	}
 
 }

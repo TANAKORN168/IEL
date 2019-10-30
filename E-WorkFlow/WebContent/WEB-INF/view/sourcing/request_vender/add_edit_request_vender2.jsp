@@ -1,20 +1,8 @@
-<%
-String view = request.getParameter("view");
-if("info".equals(view)){
-%>
-	<%@ include file="../../headerInclude.jsp" %>
-<%
-}else{
-%>
-	<%@ include file="../../header.jsp" %>
-<%
-}
-%>  
-
+<%@ include file="../../headerInclude.jsp" %>  
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!-- Content Header (Page header) -->
     <!-- Main content -->
-    <section class="content" >
+    <section class="content">
     
     <section class="content-header">
       <h1><u>สร้างใบขอเปิดบัญชีผู้จำหน่าย</u></h1>
@@ -44,7 +32,7 @@ if("info".equals(view)){
 				 <input id="last_approve" name="last_approve" type="hidden"  value="1">
 			</div>
 			<div class="row">
-				<div class="col-lg-12 col-xs-12" >
+				<div class="col-lg-12 col-xs-12">
 							<div class="container" style="width: 100%">
 						       <ul class="progressbar">
 						           <c:forEach var="status_info" items="${command.list_status}"> 
@@ -63,7 +51,7 @@ if("info".equals(view)){
 						       </ul>
 						   </div>
 					
-					<div class="box-body" >
+					<div class="box-body">
 						<div class="box box-primary">
 							<div class="row">
 								<div align="center" style="font-size: 20px;"><b>บริษัท อินเตอร์ เอ็กซ์เพรส โลจิสติกส์ (Group) จำกัด </b></div>
@@ -485,15 +473,11 @@ if("info".equals(view)){
 					</div>
 				</div>
 				<!-- /.box-body -->
-				<c:choose>
-					<c:when test="${view != 'info'}">
-						<div class="box-footer">
-							<a href="list_request_vender.htm" class="btn btn-default"">Cancel</a>
-							<button type="submit" class="btn btn-info pull-right">Save</button>
-						</div>
-					</c:when>
-				</c:choose>
-			</div>
+			  <div class="box-footer">
+			  	<a href="list_request_vender.htm" class="btn btn-default"">Cancel</a>
+				<button type="submit" class="btn btn-info pull-right">Save</button>
+			  </div>
+		  </div>
 		  <!-- /.box-footer -->
 		</form>
 	  
@@ -929,10 +913,4 @@ if("info".equals(view)){
 		
 	</script>
     
-<%
-if(!"info".equals(view)){
-%>
-	<%@ include file="../../footer.jsp" %>
-<%
-}
-%> 
+<%@ include file="../../footer.jsp" %>

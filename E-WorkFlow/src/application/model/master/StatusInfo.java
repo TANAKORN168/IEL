@@ -2,14 +2,15 @@ package application.model.master;
 
 public class StatusInfo {
 
+	public String name_not_insert = "|name_not_insert|";
 	private int id;
 	private String main_code;
 	private String status_code;
 	private String status_name;
 	private String discription;
-	private boolean approve;//ต้องการอนุมัติ
+	private boolean must_approve;//ต้องการอนุมัติ
 	private int level;
-	
+    
 	public int getId() {
 		return id;
 	}
@@ -50,12 +51,12 @@ public class StatusInfo {
 		this.discription = discription;
 	}
 
-	public boolean isApprove() {
-		return approve;
+	public boolean isMust_approve() {
+		return must_approve;
 	}
 
-	public void setApprove(boolean approve) {
-		this.approve = approve;
+	public void setMust_approve(boolean must_approve) {
+		this.must_approve = must_approve;
 	}
 
 	public int getLevel() {
@@ -64,6 +65,14 @@ public class StatusInfo {
 
 	public void setLevel(int level) {
 		this.level = level;
+	}
+
+	public String getName_not_insert() {
+		return name_not_insert;
+	}
+
+	public void setName_not_insert(String name_not_insert) {
+		this.name_not_insert = name_not_insert;
 	}
 
 }

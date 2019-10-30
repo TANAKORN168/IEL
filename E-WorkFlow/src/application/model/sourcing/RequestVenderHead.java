@@ -7,61 +7,62 @@ import application.model.master.StatusMovement;
 import application.service.utility.MyDate;
 
 public class RequestVenderHead {
-
+	
+	public String name_not_insert = "|name_not_insert|timeadd_date_th|details|list_status|list_status_movement|";
 	private int id;
 	private String status_code;
 	private String status_name;
-	private String request_vender_code;//เลขที่ใบขอ
-	private String vender_code;//เลขที่ผู้ประกอบการ
-	private String vender_ref_code;//เลขที่อ้างอิงผู้ประกอบการ
-	private String request_vender_date;//วันที่ทำใบขอ
-	private String trade_contact;// ติดต่อทางการค้า
-	private String group_name;// ชื่อกลุ่ม
-	private String tax_id;// เลขประจำตัวผู้เสียภาษี
+	private String request_vender_code; //เลขที่ใบขอ
+	private String vender_code; //เลขที่ผู้ประกอบการ
+	private String vender_ref_code; //เลขที่อ้างอิงผู้ประกอบการ
+	private String request_vender_date; //วันที่ทำใบขอ
+	private String trade_contact; // ติดต่อทางการค้า
+	private String group_name; // ชื่อกลุ่ม
+	private String tax_id; // เลขประจำตัวผู้เสียภาษี
 	// ประเภทผู้ประกอบการ
-	private boolean vat_registration;// true = จดทะเบียนภาษีมูลค่าเพิ่ม, false = ไม่ได้จดทะเบียนมูลค่าเพิ่ม
-	private int vat_percent;// % ภาษีมูลค่าเพิ่ม
-	private boolean vat_separately;// true = ภาษีมูลค่าเพิ่มแยกนอก (Exciusive Vat), false = ภาษีมูลค่าเพิ่มรวมใน (Inclusive Vat)
-	private int nature_of_business;// ลักษณะกิจการ 0 = ผู้ผลิต, 1 = ตัวแทนจำหน่าย, 2 = อื่น ๆ ระบุ
-	private String nature_of_business_remark;// อื่น ๆ ระบุ
-	private String headquarters;// สำนักงานใหญ่
-	private String tel_headquarters;// โทรศัพท์
-	private String tax_headquarters;// โทรสาร
-	private String factory;// โรงงาน
-	private String tel_factory;// โทรศัพท์
-	private String tax_factory;// โทรสาร
-	private String contact_name1;// ผู้ติดต่อคนที่1
-	private String contact_position1;// ตำแหน่ง
-	private String contact_tel1;// โทรศัพท์
-	private String contact_name2;// ผู้ติดต่อคนที่2
-	private String contact_position2;// ตำแหน่ง
-	private String contact_tel2;// โทรศัพท์
-	private String contact_name3;// ผู้ติดต่อคนที่3
-	private String contact_position3;// ตำแหน่ง
-	private String contact_tel3;// โทรศัพท์
-	private String contact_name4;// ผู้ติดต่อคนที่4
-	private String contact_position4;// ตำแหน่ง
-	private String contact_tel4;// โทรศัพท์
-	private String current_account_no;// บัญชีกระแสรายวัน
-	private String saving_account_no;// บัญชีออมทรัพย์
-	private String account_name;// ชื่อบัญชี
+	private boolean vat_registration; // true = จดทะเบียนภาษีมูลค่าเพิ่ม, false = ไม่ได้จดทะเบียนมูลค่าเพิ่ม
+	private int vat_percent; // % ภาษีมูลค่าเพิ่ม
+	private boolean vat_separately; // true = ภาษีมูลค่าเพิ่มแยกนอก (Exciusive Vat), false = ภาษีมูลค่าเพิ่มรวมใน (Inclusive Vat)
+	private int nature_of_business; // ลักษณะกิจการ 0 = ผู้ผลิต, 1 = ตัวแทนจำหน่าย, 2 = อื่น ๆ ระบุ
+	private String nature_of_business_remark; // อื่น ๆ ระบุ
+	private String headquarters; // สำนักงานใหญ่
+	private String tel_headquarters; // โทรศัพท์
+	private String tax_headquarters; // โทรสาร
+	private String factory; // โรงงาน
+	private String tel_factory; // โทรศัพท์
+	private String tax_factory; // โทรสาร
+	private String contact_name1; // ผู้ติดต่อคนที่1
+	private String contact_position1; // ตำแหน่ง
+	private String contact_tel1; // โทรศัพท์
+	private String contact_name2; // ผู้ติดต่อคนที่2
+	private String contact_position2; // ตำแหน่ง
+	private String contact_tel2; // โทรศัพท์
+	private String contact_name3; // ผู้ติดต่อคนที่3
+	private String contact_position3; // ตำแหน่ง
+	private String contact_tel3; // โทรศัพท์
+	private String contact_name4; // ผู้ติดต่อคนที่4
+	private String contact_position4; // ตำแหน่ง
+	private String contact_tel4; // โทรศัพท์
+	private String current_account_no; // บัญชีกระแสรายวัน
+	private String saving_account_no; // บัญชีออมทรัพย์
+	private String account_name; // ชื่อบัญชี
 	private boolean legal_entity; // true = นิติบุคคล, false = บุคคลธรรมดา
-	private boolean copy_company_registration;// สำเนาหนังสือรับรองการจดทะเบียนห้างหุ้นส่วน/บริษัท (อายุไม่เกิน 2 เดือน)
-	private boolean copy_company_certificate;// สำเนาใบสำคัญแสดงการจดทะเบียนห้างหุ้นส่วน / บริษัท
-	private boolean copy_vat_certificate;// สำเนาใบสำคัญทะเบียนบ้านภาษีมูลค่าเพิ่ม (ภ.พ. 20)
-	private boolean power_of_attorney;// หนังสือมอบอำนาจพร้อมอากรแสตมป์กรณีที่ผู้มีอำนาจไม่สามารถมาดำเนินการได้ด้วยตนเอง
-	private boolean house_registration_authorized;// สำเนาทะเบียนบ้านของผู้มีอำนาจลงนาม
-	private boolean copy_bank_statement;// สำเนาสมุดบัญชีเงินฝาก
-	private boolean copy_identification_authorized;// สำเนาบัตรประชาชนของผู้มีอำนาจลงนาม
-	private boolean other_specify;// อื่น ๆ ระบุ
-	private String other_specify_remark;// อื่น ๆ ระบุ
-	private boolean copy_id_crad;// สำเนาบัตรประชาชน
-	private boolean copy_tax;// สำเนาบัตรประจำตัวผู้เสียภาษี
-	private boolean copy_commercial_certificate;// สำเนาใบทะเบีนพาณิชย์ กรณีได้จดทะเบียนพาณิชย์
-	private boolean house_registration;// สำเนาทะเบียนบ้าน
-	private boolean copy_bank_statement_individual;// สำเนาสมุดบัญชีเงินฝาก
-	private boolean copy_vat_certificate_individual;// สำเนาใบสำคัญทะเบียนบ้านภาษีมูลค่าเพิ่ม (ภ.พ. 20) (กรณีจดทะเบียนภาษีมูลค่าเพิ่ม )
-
+	private boolean copy_company_registration; // สำเนาหนังสือรับรองการจดทะเบียนห้างหุ้นส่วน/บริษัท (อายุไม่เกิน 2 เดือน)
+	private boolean copy_company_certificate; // สำเนาใบสำคัญแสดงการจดทะเบียนห้างหุ้นส่วน / บริษัท
+	private boolean copy_vat_certificate; // สำเนาใบสำคัญทะเบียนบ้านภาษีมูลค่าเพิ่ม (ภ.พ. 20)
+	private boolean power_of_attorney; // หนังสือมอบอำนาจพร้อมอากรแสตมป์กรณีที่ผู้มีอำนาจไม่สามารถมาดำเนินการได้ด้วยตนเอง
+	private boolean house_registration_authorized; // สำเนาทะเบียนบ้านของผู้มีอำนาจลงนาม
+	private boolean copy_bank_statement; // สำเนาสมุดบัญชีเงินฝาก
+	private boolean copy_identification_authorized; // สำเนาบัตรประชาชนของผู้มีอำนาจลงนาม
+	private boolean other_specify; // อื่น ๆ ระบุ
+	private String other_specify_remark; // อื่น ๆ ระบุ
+	private boolean copy_id_crad; // สำเนาบัตรประชาชน
+	private boolean copy_tax; // สำเนาบัตรประจำตัวผู้เสียภาษี
+	private boolean copy_commercial_certificate; // สำเนาใบทะเบีนพาณิชย์ กรณีได้จดทะเบียนพาณิชย์
+	private boolean house_registration; // สำเนาทะเบียนบ้าน
+	private boolean copy_bank_statement_individual; // สำเนาสมุดบัญชีเงินฝาก
+	private boolean copy_vat_certificate_individual; // สำเนาใบสำคัญทะเบียนบ้านภาษีมูลค่าเพิ่ม (ภ.พ. 20) (กรณีจดทะเบียนภาษีมูลค่าเพิ่ม )
+	private boolean send_approve;
     private String timeadd_date;
     private String timeadd_time;
     private String timeadd_user;
@@ -570,6 +571,22 @@ public class RequestVenderHead {
 
 	public void setList_status_movement(List<StatusMovement> list_status_movement) {
 		this.list_status_movement = list_status_movement;
+	}
+
+	public String getName_not_insert() {
+		return name_not_insert;
+	}
+
+	public void setName_not_insert(String name_not_insert) {
+		this.name_not_insert = name_not_insert;
+	}
+
+	public boolean isSend_approve() {
+		return send_approve;
+	}
+
+	public void setSend_approve(boolean send_approve) {
+		this.send_approve = send_approve;
 	}
 
 }

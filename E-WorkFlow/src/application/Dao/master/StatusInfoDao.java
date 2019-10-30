@@ -13,9 +13,15 @@ public class StatusInfoDao extends Dao{
 	}
 	
 	public List<Object> getByMainCode(String main_code) {
-		String codition = "main_code = '" + main_code + "'";
-		List<Object> list = this.getByWhere(codition);
+		String condition = "main_code = '" + main_code + "' order by status_code";
+		List<Object> list = this.getByWhere(condition);
 		return list;
+	}
+	
+	public Object getByStatusCode(String main_code, String status_code) {
+		String condition =  "main_code = '" + main_code + "' and status_code = '" + status_code + "'";
+		List<Object> list = this.getByWhere(condition);
+		return list.size() > 0 ? list.get(0) : null;
 	}
 	
 }

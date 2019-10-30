@@ -13,14 +13,14 @@ public class UsersDao extends Dao{
 	}
 	
 	public Object getByUsernamePassword(String username, String password) {
-		String codition = "username = '" + username + "' and password = '" + password + "'";
-		List<Object> list = this.getByWhere(codition);
+		String condition = "username = '" + username + "' and password = '" + password + "'";
+		List<Object> list = this.getByWhere(condition);
 		return list.size() > 0 ? list.get(0) : null;
 	}
 	
 	public List<Object> getByOrgCode(String org_code) {
-		String codition = "org_code = '" + org_code + "'";
-		List<Object> list = this.getByWhere(codition);
+		String condition = "org_code = '" + org_code + "'";
+		List<Object> list = this.getByWhere(condition);
 		return list;
 	}
 }

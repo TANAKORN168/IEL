@@ -2,38 +2,37 @@ package application.model.sourcing;
 
 public class RequestVenderDetail {
 
-	private int id;
-	private int head_id;
-	
-	private String product_code;//รหัสสินค้า 	
-	private String product_barcode;//รหัสบาร์โคด 	
-	private String product_name;//ชื่อสินค้า 	
-	private String contain;//ขนาดบรรจุ
+	public String name_not_insert = "|name_not_insert|";
+	private int id; 
+	private int head_id; 
+	private String product_code = ""; //รหัสสินค้า 	
+	private String product_barcode = ""; //รหัสบาร์โคด 	
+	private String product_name = ""; //ชื่อสินค้า 	
+	private String contain = ""; //ขนาดบรรจุ
 	//หน่วยหลัก/ย่อย
-	private String chest;//หีบ 
-	private String bundle;//มัด
-	private double sale_price;//ราคาขาย
+	private String chest = ""; //หีบ 
+	private String bundle = ""; //มัด
+	private double sale_price = 0.00; //ราคาขาย
 	//ราคาทุน
-	private double main_capital;//ทุนหลัก
-	private double sub_capital;//ทุนย่อย
+	private double main_capital = 0.00; //ทุนหลัก
+	private double sub_capital = 0.00; //ทุนย่อย
 	//GP
-	private double baht;//(บาท)
-	private double percent;//(%)
-	private String product_category;//หมวดสินค้า
-	private String supplier_code;//รหัสผู้จำหน่าย
-	private String supplier_name;//ชื่อผู้จำหน่าย
-	private String brand;//ยี่ห้อ
+	private double baht = 0.00; //(บาท)
+	private double percent = 0.00; //(%)
+	private String product_category = ""; //หมวดสินค้า
+	private String supplier_code = ""; //รหัสผู้จำหน่าย
+	private String supplier_name = ""; //ชื่อผู้จำหน่าย
+	private String brand = ""; //ยี่ห้อ
 	//เงื่อนไขทางการค้า
-	private  boolean is_take_back = true;//รับคืน
-	private String delivery_branch;//สาขาที่ส่งสินค้า
-	private String delivery_schedule;//กำหนดส่งสินค้า
-	
-    private String timeadd_date;
-    private String timeadd_time;
-    private String timeadd_user;
-    private String timeupd_date;
-    private String timeupd_time;
-    private String timeupd_user;
+	private  boolean take_back = true; //รับคืน
+	private String delivery_branch = ""; //สาขาที่ส่งสินค้า
+	private String delivery_schedule = ""; //กำหนดส่งสินค้า
+    private String timeadd_date; 
+    private String timeadd_time; 
+    private String timeadd_user; 
+    private String timeupd_date; 
+    private String timeupd_time; 
+    private String timeupd_user; 
     
 	public int getId() {
 		return id;
@@ -175,12 +174,12 @@ public class RequestVenderDetail {
 		this.brand = brand;
 	}
 
-	public Boolean getIs_take_back() {
-		return is_take_back;
+	public boolean isTake_back() {
+		return take_back;
 	}
 
-	public void setIs_take_back(Boolean is_take_back) {
-		this.is_take_back = is_take_back;
+	public void setTake_back(boolean take_back) {
+		this.take_back = take_back;
 	}
 
 	public String getDelivery_branch() {
@@ -217,10 +216,6 @@ public class RequestVenderDetail {
 
 	public void setPercent(double percent) {
 		this.percent = percent;
-	}
-
-	public void setIs_take_back(boolean is_take_back) {
-		this.is_take_back = is_take_back;
 	}
 
 	public void setTimeadd_date(String timeadd_date) {
@@ -266,4 +261,13 @@ public class RequestVenderDetail {
 	public void setTimeupd_user(String timeupd_user) {
 		this.timeupd_user = timeupd_user;
 	}
+
+	public String getName_not_insert() {
+		return name_not_insert;
+	}
+
+	public void setName_not_insert(String name_not_insert) {
+		this.name_not_insert = name_not_insert;
+	}
+	
 }

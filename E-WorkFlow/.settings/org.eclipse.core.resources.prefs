@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/view/approve_list.jsp=UTF-8
 encoding//WebContent/WEB-INF/view/header.jsp=UTF-8
 encoding//WebContent/WEB-INF/view/sourcing/request_vender/add_edit_request_vender.jsp=UTF-8
 encoding//WebContent/WEB-INF/view/sourcing/request_vender/list_request_vender.jsp=UTF-8

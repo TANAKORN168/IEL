@@ -12,6 +12,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 public class MapObject <T>{
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -32,37 +34,73 @@ public class MapObject <T>{
 						| InvocationTargetException | NoSuchMethodException | SecurityException e1) {
 					e1.printStackTrace();
 				}
-
+	            
+				String name_not_insert = "";
 		        for(Field field: fields) {
 		        	String field_name = field.getName();
 		            String field_type = field.getType().getName();
+		            
 			        System.out.println(field_type + " : " +field_name);
 		            try{
+		            	if("name_not_insert".equals(field_name)) {
+		            		name_not_insert = BeanUtils.getProperty(dto, "name_not_insert");
+		            	}
+			            
+			            if(name_not_insert.indexOf("|"+field_name+"|") >= 0)
+							continue;
+						
 		            	if("java.lang.String".equals(field_type)) {
 			                String value = rs.getString(field_name);
+			                
+			               if (value == null) continue;
+			                
 			                field.set(dto, field.getType().getConstructor(String.class).newInstance(value));
+			                continue;
 		            	}
 		            	
 		            	if("java.lang.Integer".equals(field_type)) {
 		            		Integer value = rs.getInt(field_name);
+		            		
 		            		Class<?> type = MAP.containsKey(value.getClass()) ? MAP.get(value.getClass()) : value.getClass();
 			                field.set(dto, field.getType().getConstructor(type).newInstance(value));
+			                continue;
 		            	}
 		            	
 		            	if("int".equals(field_type)) {
 		            		Integer value = rs.getInt(field_name);
+			                
 			                field.set(dto, value);
+			                continue;
+		            	}
+		            	
+		            	if("java.lang.Doubel".equals(field_type)) {
+		            		Double value = rs.getDouble(field_name);
+			                
+		            		Class<?> type = MAP.containsKey(value.getClass()) ? MAP.get(value.getClass()) : value.getClass();
+			                field.set(dto, field.getType().getConstructor(type).newInstance(value));
+			                continue;
+		            	}
+		            	
+		            	if("double".equals(field_type)) {
+		            		Double value = rs.getDouble(field_name);
+			                
+			                field.set(dto, value);
+			                continue;
 		            	}
 		            	
 		            	if("java.lang.Boolean".equals(field_type)) {
 		            		Boolean value = rs.getBoolean(field_name);
+			                
 		            		Class<?> type = MAP.containsKey(value.getClass()) ? MAP.get(value.getClass()) : value.getClass();
 			                field.set(dto, field.getType().getConstructor(type).newInstance(value));
+			                continue;
 		            	}
 		            	
 		            	if("boolean".equals(field_type)) {
 		            		Boolean value = rs.getBoolean(field_name);
+			                
 			                field.set(dto, value);
+			                continue;
 		            	}
 		            } catch (Exception e) {
 		                e.printStackTrace();
@@ -99,7 +137,7 @@ public class MapObject <T>{
 	        for(Field field: fields) {
 	            String field_name = field.getName();
 	            String field_type = field.getType().getName();
-		        //System.out.println(field_type + " : " +field_name);
+		        System.out.println(field_type + " : " +field_name);
 		        
 		        if("id".equals(field_name)) continue;
 	            
@@ -133,6 +171,23 @@ public class MapObject <T>{
 	            		if(str == null) continue;
 	            		
 	            		int value = Integer.valueOf(str);
+		                field.set(dto, value);
+	            	}
+	            	
+	            	if("java.lang.Double".equals(field_type)) {
+	            		
+	            		if(str == null) continue;
+	            		
+	            		Double value = Double.valueOf(str);
+	            		Class<?> type = MAP.containsKey(value.getClass()) ? MAP.get(value.getClass()) : value.getClass();
+		                field.set(dto, field.getType().getConstructor(type).newInstance(value));
+	            	}
+	            	
+	            	if("double".equals(field_type)) {
+	            		
+	            		if(str == null) continue;
+	            		
+	            		double value = Double.valueOf(str);
 		                field.set(dto, value);
 	            	}
 	            	

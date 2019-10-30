@@ -106,6 +106,14 @@ public class Dao {
 		return obj.getData(this.obj.getClass(), rs).get(0);
 	}
 
+	public Object getByCode(String code) {
+		String sql = "select * from " + this.tableName + " where code = '" + code + "'";
+		ResultSet rs = this.executeQuery(sql);
+		MapObject<Object> obj = new MapObject<Object>();
+
+		return obj.getData(this.obj.getClass(), rs).get(0);
+	}
+
 	public List<Object> getByLikeField(String field, String text) {
 		String sql = "select * from " + this.tableName + " where " + field + " like (%" + text + "%)" + " order by id";
 		ResultSet rs = this.executeQuery(sql);
@@ -114,17 +122,20 @@ public class Dao {
 		return obj.getData(this.obj.getClass(), rs);
 	}
 
-	public List<Object> getByWhere(String codition) {
-		String sql = "select * from " + this.tableName + " where " + codition;
+	public List<Object> getByWhere(String condition) {
+		String sql = "select * from " + this.tableName + " where " + condition;
 		ResultSet rs = this.executeQuery(sql);
 		MapObject<Object> obj = new MapObject<Object>();
-
+		
+		System.out.println("SQL : " + sql);
+		
 		return obj.getData(this.obj.getClass(), rs);
 	}
 
 	public int add(Object obj) {
 		String str_field = "";
 		String str_value = "";
+		String name_not_insert = "";
 
 		List<Field> fields = Arrays.asList(obj.getClass().getDeclaredFields());
 		for (Field field : fields) {
@@ -132,12 +143,22 @@ public class Dao {
 				String name = field.getName();
 				String value = BeanUtils.getProperty(obj, name);
 
+				if ("name_not_insert".equals(name.toLowerCase())) {
+					name_not_insert = value;
+				}
+				
+				if(name_not_insert.indexOf("|"+name+"|") >= 0)
+					continue;
+				
 				if ("id".equals(name.toLowerCase()))
+					continue;
+				
+				if(value == null)
 					continue;
 
 				if ("java.lang.String".equals(field.getType().getName())) {
 					str_field += "".equals(str_field) ? name : ", " + name;
-					str_value += "".equals(str_value) ? value : ", '" + value + "'";
+					str_value += "".equals(str_value) ? "'"+value+"'" : ", '" + value + "'";
 				} else {
 					str_field += "".equals(str_field) ? name : ", " + name;
 					str_value += "".equals(str_value) ? value : ", " + value;
@@ -159,12 +180,23 @@ public class Dao {
 	public int edit(Object obj) {
 		String objId = "0";
 		String str = "";
+		String name_not_insert = "";
 
 		List<Field> fields = Arrays.asList(obj.getClass().getDeclaredFields());
 		for (Field field : fields) {
 			try {
 				String name = field.getName();
 				String value = BeanUtils.getProperty(obj, name);
+
+				if ("name_not_insert".equals(name.toLowerCase())) {
+					name_not_insert = value;
+				}
+				
+				if(name_not_insert.indexOf("|"+name+"|") >= 0)
+					continue;
+				
+				if(value == null)
+					continue;
 
 				if ("id".equals(name.toLowerCase())) {
 					objId = value;
@@ -190,6 +222,11 @@ public class Dao {
 		String sql = "update " + this.tableName + " set " + str + " where id =" + objId;
 		int id = this.execute(sql);
 		return id;
+	}
+	
+	public void delete(int id) {
+		String sql = "delete from " + this.tableName + " where id =" + id;
+		this.execute(sql);
 	}
 
 }

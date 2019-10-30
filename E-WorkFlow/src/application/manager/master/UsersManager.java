@@ -14,6 +14,10 @@ public class UsersManager {
 		this.dao = new UsersDao();
 	}
 
+	public Users getById(int id) {
+		return (Users)this.dao.getById(id);
+	}
+
 	public List<Users> getByAll() {
 		return (List<Users>)(Object)this.dao.getByAll();
 	}

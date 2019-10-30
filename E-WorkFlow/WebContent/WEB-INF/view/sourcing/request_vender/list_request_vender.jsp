@@ -53,49 +53,57 @@
                 </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1.</td>
-                    <td class="text-center"><a href="#">RE191012001</a></td>
-					<td>12/10/2562</td>
-					<td>นายกอการช่าง</td>
-                    <td>088-888-8888</td>
-                     <td class="text-center" style="vertical-align: middle;"><a href="#"><span class="label label-default">สร้าง</span></a></td>
-                    <td>
-						<a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default">
-							<i class="fa fa-print"></i> ใบเปิดหน้าบัญชี
-						</a>
-						<a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default">
-							<i class="fa fa-upload"></i> upload
-						</a>
-					</td>
-                  </tr>
-                  <tr>
-                    <td>2.</td>
-                    <td class="text-center"><a href="#">RE191012002</a></td>
-					<td>12/10/2562</td>
-					<td>นายสุรพล ดำเนินสะดวก</td>
-                    <td>099-999-9999</td>
-                     <td class="text-center" style="vertical-align: middle;"><a href="#"><span class="label label-default">สร้าง</span></a></td>
-                    <td>
-						<a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default">
-							<i class="fa fa-print"></i> ใบเปิดหน้าบัญชี
-						</a>
-						<a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default">
-							<i class="fa fa-upload"></i> upload
-						</a>
-					</td>
-                  </tr>
+                	<c:forEach var="obj" items="${command}" varStatus="current"> 
+                		<tr>
+                			<td>${current.count}.</td>
+                			 <td class="text-center">
+                			 	<c:choose>
+									<c:when test="${obj.status_code eq '00' && !obj.send_approve}">
+	                			 		<a href="add_edit_request_vender.htm?id=${obj.id}">${obj.request_vender_code}</a>
+	                			 	</c:when>
+	                			 	<c:otherwise>
+	                			 		${obj.request_vender_code}
+	                			 	</c:otherwise>
+                			 	</c:choose>
+                			 </td>
+                			 <td>${obj.request_vender_date}</td>
+                			 <td>${obj.contact_name1}</td>
+                			 <td>${obj.contact_tel1}</td>
+								<td class="text-center" style="vertical-align: middle;">
+									<c:choose>
+										<c:when test="${obj.status_code eq '00'}">
+											<span class="label label-default">${obj.status_name}</span>
+										</c:when>
+										<c:when test="${obj.status_code eq '01'}">
+											<span class="label label-primary">${obj.status_name}</span>
+										</c:when>
+										<c:when test="${obj.status_code eq '02'}">
+											<span class="label label-success">${obj.status_name}</span>
+										</c:when>
+									</c:choose>
+								</td>
+								<td>
+									<c:choose>
+										<c:when test="${!obj.send_approve}">
+											<a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default" onclick="send_approve(${obj.id})">
+												<i class="fa fa-share-square-o"></i> ส่งขออนุมัติ
+											</a>
+										</c:when>
+									</c:choose>
+									
+									<!-- 
+									<a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default">
+										<i class="fa fa-print"></i> ใบเปิดหน้าบัญชี
+									</a>
+									<a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default">
+										<i class="fa fa-upload"></i> upload
+									</a>
+									 -->
+							</td>
+                		</tr>
+                	</c:forEach>
                 </tbody>
               </table>
-              <div class="box-footer clearfix">
-                <ul class="pagination pagination-sm no-margin pull-right">
-                  <li><a href="#">«</a></li>
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">»</a></li>
-                </ul>
-              </div>
             </div>
             <!-- /.box-body -->
           </div>
@@ -103,40 +111,31 @@
         </div>
       </div>
 	 </div>
-	  <div class="modal fade" id="modal-default">
-		<div class="modal-dialog">
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span></button>
-			  <h4 class="modal-title">พิมพ์บิล/บาร์โค้ด</h4>
-			</div>
-			<div class="modal-body clearfix">
-				<a href="../demo/barcode.pdf" target="_blank" class="btn btn-app"><i class="fa fa-barcode"></i> พิมพ์บาร์โค้ด</a>
-				<a href="../demo/Print.pdf" target="_blank" class="btn btn-app"><i class="fa fa-print"></i> พิมพ์บิลสลิป/ใบเสร็จรับเงิน</a>
-				<a href="../demo/Information.pdf" target="_blank" class="btn btn-app"><i class="fa fa-print"></i> พิมพ์บิลขนส่ง</a>
-				<a href="../demo/doc_return.pdf" target="_blank" class="btn btn-app"><i class="fa fa-print"></i> บาร์โค๊ดเอกสารนำกลับ</a>
-			</div>
-		  </div>
-		  <!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
     </section>
-	<script>
-		$( document ).ready(function() {
-			$("[data-code='ListBill']").parent().attr('class','active');
-			$($("[data-code='ListBill']").parent().parents()).each(function( index ) {
-				 if($( this ).prop("tagName") == 'UL'){
-					 if($( this ).attr('class') == 'treeview-menu'){
-						 $( this ).attr('style', 'display: block;');
-					 } 
-				}
-				 if($( this ).prop("tagName") == 'LI'){
-					 $( this ).attr('class', $( this ).attr('class')+" menu-open");
-					 $( this ).attr('style', 'height: auto;');
-				}  	
-			});
+    <script type="text/javascript">
+    
+    function send_approve(id){
+    	var objFormJSP = new Object();
+		objFormJSP.id = id;
+		$.ajax({
+			url: "${pageContext.request.contextPath}/send_approve.htm",
+			type: 'POST',
+			dataType: 'json',
+			data: JSON.stringify(objFormJSP),
+			contentType: 'application/json',
+			mimeType: 'application/json',
+			
+			success: function (data) {
+	        	$.each(data, function (index, data_response) {
+					if(data_response.status == "SUCCESS"){
+						window.location = "${pageContext.request.contextPath}/list_request_vender.htm";
+					}
+	        	});
+	        },
+			error:function(data,status,er) {
+				alert("error: "+data+" status: "+status+" er:"+er);
+			}
 		});
-	</script>
+    } 
+    </script>
 <%@ include file="../../footer.jsp" %>

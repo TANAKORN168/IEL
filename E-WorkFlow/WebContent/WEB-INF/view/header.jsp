@@ -90,18 +90,28 @@
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-      	<li><a href="dashboard.htm"><i class="fa fa-pie-chart"></i>Dashboard</a></li>
-        <li class="header">ระบบจัดหา</li>
-        <li><a href="list_request_vender.htm"><i class="fa fa-book"></i> <span>สร้างใบขอเปิดบัญชีผู้จำหน่าย</span></a></li>
-        <li class="header">ระบบจัดซื้อ</li>
-        <li><a href="main.htm"><i class="fa fa-book"></i> <span>สร้างใบ PR</span></a></li>
-        <li><a href="ManageBill/ListBill.html"><i class="fa fa-book"></i> <span>สร้างใบ PA</span></a></li>
-        <li><a href="ManageBill/ListBill.html"><i class="fa fa-book"></i> <span>สร้างใบ PO</span></a></li>
-        <li class="header">ระบบทรัพย์สิน</li>
-        <li><a href="import/ScanToCage.html"><i class="fa fa-book"></i> <span>Adjust ทรัพย์สิน</span></a></li>
-        <li><a href="import/ListMoving.html"><i class="fa fa-book"></i> <span>สร้างใบโอนย้าย</span></a></li>
-        <li><a href="import/ssss"><i class="fa fa-book"></i> <span>สร้างใบซ่อมแซม</span></a></li>
-        <li><a href="import/ssss"><i class="fa fa-book"></i> <span>สร้างใบตัดจ่าย</span></a></li>
+      	<c:choose>
+		  <c:when test="${users.level > 1}">
+		  	<li>
+		  		<a href="approve_list.htm">
+		  			<i class="fa fa-dashcube"></i> 
+		  			<span>รายการอนุมัติ</span> 
+		  			<c:choose>
+		  				<c:when test="${approve_count > 0}">
+		  					<span class="badge label-warning">${approve_count}</span>
+		  				</c:when>
+		  			</c:choose>
+		  		</a>
+		  	</li>
+		  </c:when>
+		</c:choose>
+      
+      	<c:forEach var="menu" items="${list_menu}">
+      		<li class="header">${menu.name}</li>
+      		<c:forEach var="program" items="${menu.list_program}">
+      			<li><a href="${program.url_link}"><i class="${program.icon}"></i> <span>${program.name}</span></a></li>
+      		</c:forEach>
+      	</c:forEach>
       </ul>
     </section>
     <!-- /.sidebar -->

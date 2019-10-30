@@ -22,6 +22,10 @@ public class StatusInfoManager {
 		return (List<StatusInfo>)(Object)this.dao.getByMainCode(main_code);
 	}
 	
+	public StatusInfo getByStatusCode(String main_code, String status_code){
+		return (StatusInfo)this.dao.getByStatusCode(main_code, status_code);
+	}
+	
 	public int add(StatusInfo statusInfo) {
 		int id = this.dao.add(statusInfo);
 		this.dao.commit();
