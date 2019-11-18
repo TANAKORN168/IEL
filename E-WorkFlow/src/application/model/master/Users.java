@@ -2,6 +2,7 @@ package application.model.master;
 
 //ALTER TABLE master.users ADD COLUMN id SERIAL PRIMARY KEY;
 public class Users {
+	public String name_not_insert = "|name_not_insert|company_name|work_line_name|department_name|section_name|organization_name|";
 	private int id;
 	private String code;
 	private String name;
@@ -18,6 +19,12 @@ public class Users {
 	private String org_code;
 	private int level;
 	private String group_menu_code;
+	
+	private String company_name;
+	private String work_line_name;
+	private String department_name;
+	private String section_name;
+	private String organization_name;
 
 	public int getId() {
 		return id;
@@ -145,6 +152,54 @@ public class Users {
 
 	public void setGroup_menu_code(String group_menu_code) {
 		this.group_menu_code = group_menu_code;
+	}
+
+	public String getName_not_insert() {
+		return name_not_insert;
+	}
+
+	public void setName_not_insert(String name_not_insert) {
+		this.name_not_insert = name_not_insert;
+	}
+
+	public String getCompany_name() {
+		return company_name;
+	}
+
+	public void setCompany_name(String company_name) {
+		this.company_name = company_name;
+	}
+
+	public String getWork_line_name() {
+		return work_line_name;
+	}
+
+	public void setWork_line_name(String work_line_name) {
+		this.work_line_name = work_line_name;
+	}
+
+	public String getDepartment_name() {
+		return department_name;
+	}
+
+	public void setDepartment_name(String department_name) {
+		this.department_name = department_name;
+	}
+
+	public String getSection_name() {
+		return section_name;
+	}
+
+	public void setSection_name(String section_name) {
+		this.section_name = section_name;
+	}
+
+	public String getOrganization_name() {
+		return organization_name;
+	}
+
+	public void setOrganization_name(String organization_name) {
+		this.organization_name = organization_name;
 	}
 
 }

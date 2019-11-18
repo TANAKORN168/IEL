@@ -1,6 +1,6 @@
 package application.manager.master;
 
-import application.Dao.master.GroupApproveDao;
+import application.dao.master.GroupApproveDao;
 import application.model.master.GroupApprove;
 
 public class GroupApproveManager {

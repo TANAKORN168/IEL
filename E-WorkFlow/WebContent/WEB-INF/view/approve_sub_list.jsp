@@ -27,7 +27,7 @@
 						</div>
 						<div id="collapse${current.count}" class="panel-collapse collapse" >
 							<c:forEach var="object_approve" items="${group_approve.list_object_approve}" varStatus="current">
-								<div class="panel-body"><a href="approve.htm?id=${object_approve.id}">${object_approve.code} ${object_approve.discription}</a></div>
+								<div class="panel-body"><a href="approve.htm?id=${object_approve.id}&head_class=${group_approve.head_class}">${object_approve.code} ${object_approve.discription}</a></div>
 							</c:forEach>
 						</div>
 					</c:forEach>

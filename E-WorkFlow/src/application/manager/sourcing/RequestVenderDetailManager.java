@@ -2,7 +2,7 @@ package application.manager.sourcing;
 
 import java.util.List;
 
-import application.Dao.sourcing.RequestVenderDetailDao;
+import application.dao.sourcing.RequestVenderDetailDao;
 import application.model.sourcing.RequestVenderDetail;
 
 public class RequestVenderDetailManager {

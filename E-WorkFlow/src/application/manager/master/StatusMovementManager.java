@@ -2,7 +2,7 @@ package application.manager.master;
 
 import java.util.List;
 
-import application.Dao.master.StatusMovementDao;
+import application.dao.master.StatusMovementDao;
 import application.model.master.StatusMovement;
 
 @SuppressWarnings("unchecked")
@@ -36,6 +36,10 @@ public class StatusMovementManager {
 	
 	public List<StatusMovement> getDataApproveAtDayApprove(int users_id, boolean approve) {
 		return (List<StatusMovement>)(Object)this.dao.getDataApproveAtDayApprove(users_id,approve);
+	}
+	
+	public int getCountWaitApprove(int head_id, String head_class) {
+		return this.dao.getCountWaitApprove(head_id, head_class);
 	}
 	
 	public int add(StatusMovement statusMovement) {

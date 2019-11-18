@@ -14,7 +14,7 @@
 <!-- ./wrapper -->
 
 <script>
-  $.widget.bridge('uibutton', $.ui.button);
+//  $.widget.bridge('uibutton', $.ui.button);
 </script>
 </body>
 </html>

@@ -2,7 +2,7 @@ package application.manager.master;
 
 import java.util.List;
 
-import application.Dao.master.UsersDao;
+import application.dao.master.UsersDao;
 import application.model.master.Users;
 
 @SuppressWarnings("unchecked")

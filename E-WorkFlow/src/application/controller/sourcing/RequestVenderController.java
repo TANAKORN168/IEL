@@ -28,6 +28,8 @@ import application.model.ObjFormJSP;
 import application.model.master.StatusInfo;
 import application.model.master.StatusMovement;
 import application.model.master.Users;
+import application.model.sourcing.CompanyContact;
+import application.model.sourcing.CompanyProduct;
 import application.model.sourcing.RequestVenderDetail;
 import application.model.sourcing.RequestVenderHead;
 import application.model.utility.MapObject;
@@ -41,9 +43,6 @@ public class RequestVenderController {
 	private UsersManager usersManager = new UsersManager();
 	private StatusInfoManager statusInfoManager = new StatusInfoManager();
 	private StatusMovementManager statusMovementManager = new StatusMovementManager();
-	
-	private String main_code = "SC";
-
 	
 	@RequestMapping(value = "/list_request_vender", method = RequestMethod.POST)
     public ModelAndView request_vender_post(HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -64,6 +63,9 @@ public class RequestVenderController {
 		
 		model.addAttribute("command", list_requestVenderHead);
 		
+		List<CompanyContact> list_company_contact = new ArrayList<CompanyContact>();
+		session.setAttribute("list_company_contact", list_company_contact);
+		
 		return new ModelAndView("sourcing/request_vender/list_request_vender");
 	}
 	
@@ -76,16 +78,10 @@ public class RequestVenderController {
 		HttpSession session = request.getSession(true);
 		Users ss_users = (Users)session.getAttribute("users");
 		
-		List<StatusInfo> list_status = this.statusInfoManager.getByMainCode(main_code);
-		
 		RequestVenderHead requestVenderHead = new RequestVenderHead();
-		List<StatusMovement> list_status_movement = new ArrayList<StatusMovement>();
-		List<RequestVenderDetail> list_detail = new ArrayList<RequestVenderDetail>();
 		
 		if(id > 0) {
 			requestVenderHead = this.requestVenderHeadManager.getById(id);
-			list_status_movement = this.statusMovementManager.getByHeadId(requestVenderHead.getId(), requestVenderHead.getClass().getSimpleName());
-			list_detail = this.requestVenderDetailManager.getByHeadId(requestVenderHead.getId());
 		}else {
 			requestVenderHead.setRequest_vender_date(MyDate.STOD(MyDate.GetCurrentDate()) + " " + MyDate.GetCurrentTime());
 	    	requestVenderHead.setVat_registration(true);
@@ -94,62 +90,93 @@ public class RequestVenderController {
 	    	requestVenderHead.setTimeadd_date(MyDate.GetCurrentDate());
 	    	requestVenderHead.setTimeadd_time(MyDate.GetCurrentTime());
 	    	requestVenderHead.setTimeadd_user(ss_users.getUsername());
-	    	
-	    	StatusMovement statusMovement;
-	    	int loop = 1;
-	    	for (StatusInfo statusInfo : list_status) {
-	    		
-	    		statusMovement = new StatusMovement();
-	        	statusMovement.setHead_class(requestVenderHead.getClass().getSimpleName());
-	        	statusMovement.setStatus_code(statusInfo.getStatus_code());
-	        	statusMovement.setStatus_name(statusInfo.getStatus_name());
-	        	statusMovement.setMust_approve(statusInfo.isMust_approve());
-	        	statusMovement.setLevel(statusInfo.getLevel());
-	        	
-	        	if(loop == 1) {
-		        	statusMovement.setUsers_id(ss_users.getId());
-		        	statusMovement.setUsers_name(ss_users.getName());
-		        	statusMovement.setUsers_position(ss_users.getPosition());
-		        	statusMovement.setUsers_url_pic(ss_users.getUrl_img());
-		        	statusMovement.setUsers_url_sig(ss_users.getUrl_signature());
-		        	statusMovement.setStamp(true);
-		        	statusMovement.setDate_time(MyDate.STOD(MyDate.GetCurrentDate()) + " " + MyDate.GetCurrentTime());
-		        	
-		        	requestVenderHead.setStatus_code(statusInfo.getStatus_code());
-		        	requestVenderHead.setStatus_name(statusInfo.getStatus_name());
-	        	}
-		        	
-	        	list_status_movement.add(statusMovement);
-	        	loop++;
-			}
-	    	
-	    	RequestVenderDetail detail = new RequestVenderDetail();
-	    	list_detail.add(detail);
 		}
-		
-		requestVenderHead.setList_status(list_status);
 		
     	requestVenderHead.setTimeupd_date(MyDate.GetCurrentDate());
     	requestVenderHead.setTimeupd_time(MyDate.GetCurrentTime());
     	requestVenderHead.setTimeupd_user(ss_users.getUsername());
     	
+    	/*
+    	List<CompanyContact> list_company_contact = new ArrayList<CompanyContact>();
+    	CompanyContact companyContact = new CompanyContact();
+    	companyContact.setName("Jack");
+    	List<CompanyContactDetail> list_company_contact_detail = new ArrayList<CompanyContactDetail>();
+    	CompanyContactDetail companyContactDetail = new CompanyContactDetail();
+    	companyContactDetail.setName("JACK_DETAIL");
+    	list_company_contact_detail.add(companyContactDetail);
+    	companyContact.setList_company_contact_detail(list_company_contact_detail);
+    	list_company_contact.add(companyContact);
+    	
+    	companyContact = new CompanyContact();
+    	companyContact.setName("Jack2");
+    	list_company_contact_detail = new ArrayList<CompanyContactDetail>();
+    	companyContactDetail = new CompanyContactDetail();
+    	companyContactDetail.setName("JACK_DETAIL2");
+    	list_company_contact_detail.add(companyContactDetail);
+    	companyContact.setList_company_contact_detail(list_company_contact_detail);
+    	list_company_contact.add(companyContact);
+    	
     	String json = "";
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			json = mapper.writeValueAsString(list_status_movement);
+			json = mapper.writeValueAsString(list_company_contact);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	model.addAttribute("list_status_movement", json);
-    	
-    	json = "";
+    	model.addAttribute("list_company_contact", json);
+    	*/
+    	ObjFormJSP objFormJSP = new ObjFormJSP();
+    	String json = "";
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			json = mapper.writeValueAsString(list_detail);
+			json = mapper.writeValueAsString(objFormJSP);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	model.addAttribute("list_detail", json);
+    	model.addAttribute("objFormJSP", json);
+    	 
+    	json = "";
+    	List<CompanyProduct> list_product_expense = new ArrayList<CompanyProduct>();
+    	//code, type, group, kind, price, barcode, name
+    	list_product_expense.add(new CompanyProduct("5140013", "11-ค่าใช้จ่ายการดำเนินงาน", "group", "ค่าต่อสัญญาบริการ (สุราษฎร์ธานี)", 0.00, "", ""));
+    	list_product_expense.add(new CompanyProduct("5140014", "11-ค่าใช้จ่ายการดำเนินงาน", "group", "ค่าต่อสัญญาบริการ (หาดใหญ่)", 0.00, "", ""));
+    	list_product_expense.add(new CompanyProduct("5150001", "11-ค่าใช้จ่ายการดำเนินงาน", "group", "ค่าเบี้ยประกัน+พรบ.+ต่อภาษีรถบรรทุก (สำนักงานใหญ่)", 0.00, "", ""));
+
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			json = mapper.writeValueAsString(list_product_expense);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	model.addAttribute("list_product_expense", json);
+    	
+    	List<CompanyProduct> list_product_asset = new ArrayList<CompanyProduct>();
+    	//code, type, group, kind, price, barcode, name
+    	list_product_asset.add(new CompanyProduct("6140013", "Computer", "notebook", "dell", 0.00, "", ""));
+    	list_product_asset.add(new CompanyProduct("6140014", "Computer", "notebook", "acer", 0.00, "", ""));
+    	list_product_asset.add(new CompanyProduct("6150001", "Computer", "notebook", "apple", 0.00, "", ""));
+
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			json = mapper.writeValueAsString(list_product_asset);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	model.addAttribute("list_product_asset", json);
+    	
+    	List<CompanyProduct> list_product_stock = new ArrayList<CompanyProduct>();
+    	//code, type, group, kind, price, barcode, name
+    	list_product_stock.add(new CompanyProduct("7140013", "อุปกรณ์ในการทำงาน", "สินค้าสิ้นเปลือง", "เทปกาว", 0.00, "", ""));
+    	list_product_stock.add(new CompanyProduct("7140014", "อุปกรณ์ในการทำงาน", "สินค้าสิ้นเปลือง", "บับเบิ้ล", 0.00, "", ""));
+    	list_product_stock.add(new CompanyProduct("7150001", "อุปกรณ์ในการทำงาน", "สินค้าสิ้นเปลือง", "ฟิมแร็ป", 0.00, "", ""));
+
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			json = mapper.writeValueAsString(list_product_stock);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	model.addAttribute("list_product_stock", json);
     	
     	model.addAttribute("command", requestVenderHead);
     	
@@ -202,7 +229,7 @@ public class RequestVenderController {
 			
 			int users_id = Integer.valueOf(users_id_approve);
 			
-			StatusInfo statusInfo = this.statusInfoManager.getByStatusCode(main_code, status_code_approve);
+			StatusInfo statusInfo = this.statusInfoManager.getByStatusCode(requestVenderHead.getMain_code(), status_code_approve);
 			Users users = this.usersManager.getById(users_id);
 	    	
 	    	if(!is_new) {
@@ -229,6 +256,7 @@ public class RequestVenderController {
 	    		if("00".equals(status_code_approve)) {
 		    		statusMovement.setDate_time(MyDate.STOD(MyDate.GetCurrentDate()) + " " + MyDate.GetCurrentTime());
 		    		statusMovement.setStamp(true);
+					statusMovement.setApprove(false);
 	    		}
 	    		
 	    		list_statusMovement.add(statusMovement);
@@ -321,5 +349,93 @@ public class RequestVenderController {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+    }
+    
+    @SuppressWarnings("unchecked")
+	@RequestMapping(value="/add_company_contact", method=RequestMethod.POST)
+    public void addCompanyContact(HttpServletRequest request, HttpServletResponse response)
+    {
+				try {
+					BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+    			
+	    			String json = "";
+	    			if(br != null){
+	    				json = br.readLine();
+	    				System.out.println(json);
+	    			}
+	    			
+	    			HttpSession session = request.getSession(true);
+	    			List<CompanyContact> list_company_contact = (List<CompanyContact>)session.getAttribute("list_company_contact");
+
+	    			ObjectMapper mapper = new ObjectMapper();
+	    			CompanyContact companyContact = mapper.readValue(json, CompanyContact.class);
+	    			if(companyContact.getName() != null && !"".equals(companyContact.getName())) {
+	    				if(!"".equals(companyContact.getRow_id_del())) {
+	    					for (CompanyContact obj : list_company_contact) {
+	    						if(companyContact.getRow_id_del().equals(obj.getRow_id_del())) {
+	    							list_company_contact.remove(obj);
+	    							list_company_contact.add(companyContact);
+	    							break;
+	    						}
+	    					}
+	    				}else {
+			    			companyContact.setRow_id_del("'company_contact_row_" + list_company_contact.size()+"'");
+			    			list_company_contact.add(companyContact);
+	    				}
+	    			}
+	    			
+	    			response.setContentType("application/json");		    
+	    			mapper.writeValue(response.getOutputStream(), list_company_contact);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+    }
+    
+    @SuppressWarnings("unchecked")
+	@RequestMapping(value="/edit_del_company_contact", method=RequestMethod.POST)
+    public void delCompanyContact(HttpServletRequest request, HttpServletResponse response)
+    {
+    	try {
+    		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+			
+			String json = "";
+			if(br != null){
+				json = br.readLine();
+				System.out.println(json);
+			}
+
+			HttpSession session = request.getSession(true);
+			List<CompanyContact> list_company_contact = (List<CompanyContact>)session.getAttribute("list_company_contact");
+			
+			ObjectMapper mapper = new ObjectMapper();
+	    	ObjFormJSP obj  = mapper.readValue(json, ObjFormJSP.class);
+	    	
+	    	if("DELETE".equals(obj.getAction())) {
+		    	for (CompanyContact companyContact : list_company_contact) {
+					if(obj.getStr1().equals(companyContact.getRow_id_del())) {
+						list_company_contact.remove(companyContact);
+						break;
+					}
+				}
+		    	
+		    	response.setContentType("application/json");		    
+				mapper.writeValue(response.getOutputStream(), list_company_contact);
+	    	}
+	    	
+	    	if("EDIT".equals(obj.getAction())) {
+	    		CompanyContact companyContact = null;
+	    		for (CompanyContact cc : list_company_contact) {
+					if(obj.getStr1().equals(cc.getRow_id_del())) {
+						companyContact = cc;
+						break;
+					}
+				}
+		    	
+		    	response.setContentType("application/json");		    
+				mapper.writeValue(response.getOutputStream(), companyContact);
+	    	}
+    	}catch (Exception e) {
+    		System.out.println("delCompanyContact[RequestVenderController] ERROR : " + e.getMessage());
+		}
     }
 }

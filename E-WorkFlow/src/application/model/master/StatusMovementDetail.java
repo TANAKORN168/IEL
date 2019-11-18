@@ -10,9 +10,6 @@ public class StatusMovementDetail {
     private String timeadd_date; 
     private String timeadd_time; 
     private String timeadd_user; 
-    private String timeupd_date; 
-    private String timeupd_time; 
-    private String timeupd_user; 
     
 	public int getId() {
 		return id;
@@ -69,29 +66,4 @@ public class StatusMovementDetail {
 	public void setTimeadd_user(String timeadd_user) {
 		this.timeadd_user = timeadd_user;
 	}
-
-	public String getTimeupd_date() {
-		return timeupd_date;
-	}
-
-	public void setTimeupd_date(String timeupd_date) {
-		this.timeupd_date = timeupd_date;
-	}
-
-	public String getTimeupd_time() {
-		return timeupd_time;
-	}
-
-	public void setTimeupd_time(String timeupd_time) {
-		this.timeupd_time = timeupd_time;
-	}
-
-	public String getTimeupd_user() {
-		return timeupd_user;
-	}
-
-	public void setTimeupd_user(String timeupd_user) {
-		this.timeupd_user = timeupd_user;
-	}
-
 }

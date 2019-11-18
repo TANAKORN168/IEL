@@ -2,7 +2,7 @@ package application.manager.master;
 
 import java.util.List;
 
-import application.Dao.master.StatusInfoDao;
+import application.dao.master.StatusInfoDao;
 import application.model.master.StatusInfo;
 
 @SuppressWarnings("unchecked")

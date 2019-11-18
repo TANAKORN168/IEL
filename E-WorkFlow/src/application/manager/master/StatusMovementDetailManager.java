@@ -2,7 +2,7 @@ package application.manager.master;
 
 import java.util.List;
 
-import application.Dao.master.StatusMovementDetailDao;
+import application.dao.master.StatusMovementDetailDao;
 import application.model.master.StatusMovementDetail;
 
 public class StatusMovementDetailManager {

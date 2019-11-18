@@ -3,10 +3,10 @@ package application.manager.master;
 import java.util.ArrayList;
 import java.util.List;
 
-import application.Dao.master.GroupMenuDao;
-import application.Dao.master.MapMenuDao;
-import application.Dao.master.MenuDao;
-import application.Dao.master.ProgramDao;
+import application.dao.master.GroupMenuDao;
+import application.dao.master.MapMenuDao;
+import application.dao.master.MenuDao;
+import application.dao.master.ProgramDao;
 import application.model.master.GroupMenu;
 import application.model.master.MapMenu;
 import application.model.master.Menu;

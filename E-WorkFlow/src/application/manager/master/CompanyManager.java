@@ -2,7 +2,7 @@ package application.manager.master;
 
 import java.util.List;
 
-import application.Dao.master.CompanyDao;
+import application.dao.master.CompanyDao;
 import application.model.master.Company;
 
 public class CompanyManager {
@@ -16,6 +16,10 @@ public class CompanyManager {
 	@SuppressWarnings("unchecked")
 	public List<Company> getByAll() {
 		return (List<Company>)(Object)this.dao.getByAll();
+	}
+	
+	public Company getById(int id) {
+		return (Company)this.dao.getById(id);
 	}
 	
 	public int add(Company company) {

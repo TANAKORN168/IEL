@@ -15,6 +15,7 @@
 <!-- JS -->
 <script src="${pageContext.request.contextPath}/assets/components/jquery/dist/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/admin.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/components/iCheck/icheck.min.js"></script>
 

@@ -5,10 +5,10 @@
     <section class="content">
 		
     <section class="content-header">
-      <h1>สร้างใบขอเปิดบัญชีผู้จำหน่าย<small>เฉพาะดำเนินการ</small></h1>
+      <h1>ใบขอขึ้นทะเบียนผู้จำหน่าย<small>เฉพาะดำเนินการ</small></h1>
       <ol class="breadcrumb">
         <li><a href="home.htm"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">สร้างใบขอเปิดบัญชีผู้จำหน่าย</li>
+        <li class="active">ใบขอขึ้นทะเบียนผู้จำหน่าย</li>
       </ol>
     </section>
 
@@ -85,7 +85,7 @@
 								<td>
 									<c:choose>
 										<c:when test="${!obj.send_approve}">
-											<a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default" onclick="send_approve(${obj.id})">
+											<a href="#" class="btn btn-primary btn-sm" onclick="send_approve(${obj.id})">
 												<i class="fa fa-share-square-o"></i> ส่งขออนุมัติ
 											</a>
 										</c:when>

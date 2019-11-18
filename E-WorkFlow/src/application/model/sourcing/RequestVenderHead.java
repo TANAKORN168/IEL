@@ -8,8 +8,9 @@ import application.service.utility.MyDate;
 
 public class RequestVenderHead {
 	
-	public String name_not_insert = "|name_not_insert|timeadd_date_th|details|list_status|list_status_movement|";
+	public String name_not_insert = "|name_not_insert|timeadd_date_th|details|list_status|list_status_movement|main_code|";
 	private int id;
+	private String main_code = "SC";
 	private String status_code;
 	private String status_name;
 	private String request_vender_code; //เลขที่ใบขอ
@@ -587,6 +588,14 @@ public class RequestVenderHead {
 
 	public void setSend_approve(boolean send_approve) {
 		this.send_approve = send_approve;
+	}
+
+	public String getMain_code() {
+		return main_code;
+	}
+
+	public void setMain_code(String main_code) {
+		this.main_code = main_code;
 	}
 
 }

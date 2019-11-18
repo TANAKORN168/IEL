@@ -28,7 +28,7 @@
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-
+      
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- User Account: style can be found in dropdown.less -->
@@ -84,14 +84,25 @@
           <img src="${users.getUrl_img()}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p style="font-size: 12px;">${users.getName()}</p>
-          <i class="fa fa-circle text-success"></i> <span style="color:#3498DB">${users.getPosition()}</span>
+          <p style="font-size: 12px; word-wrap: break-word;">${users.getName()}</p>
+          <i class="fa fa-circle text-success"></i> <span style="color:#3498DB; word-wrap: break-word;">${users.getPosition()}</span>
         </div>
       </div>
+      <!-- 
+      <div style="margin-left: 15px; color: #3498DB;">
+			<hr style="border-top:1px solid #3498DB">
+			<b>บริษัท  : </b><span style="color: black;">${users.company_name}</span><br>
+			<b>สายงาน : </b><span style="color: black;">${users.work_line_name}</span><br>
+			<b>ฝ่าย : </b><span style="color: black;">${users.department_name}</span><br>
+			<b>แผนก : </b><span style="color: black;">${users.section_name}</span><br>
+			<b>ส่วนงาน : </b><span style="color: black;">${users.organization_name}</span>
+			<hr style="border-top:1px solid #3498DB">
+      </div>
+       -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
       	<c:choose>
-		  <c:when test="${users.level > 1}">
+		  <c:when test="${users.level > -1}">
 		  	<li>
 		  		<a href="approve_list.htm">
 		  			<i class="fa fa-dashcube"></i> 
@@ -105,13 +116,27 @@
 		  	</li>
 		  </c:when>
 		</c:choose>
-      
-      	<c:forEach var="menu" items="${list_menu}">
-      		<li class="header">${menu.name}</li>
-      		<c:forEach var="program" items="${menu.list_program}">
-      			<li><a href="${program.url_link}"><i class="${program.icon}"></i> <span>${program.name}</span></a></li>
-      		</c:forEach>
-      	</c:forEach>
+		
+		<c:forEach var="menu" items="${list_menu}">
+			<li class="treeview" style="height: auto;">
+				<a href="#"> 
+					<i class="fa fa-folder"></i> <span style="color: black;">${menu.name}</span>
+					<span class="pull-right-container"> 
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" >
+					<c:forEach var="program" items="${menu.list_program}">
+						<li>
+							<a href="${program.url_link}">
+								<i class="${program.icon}"></i> ${program.name}
+							</a>
+						</li>
+					</c:forEach>
+				</ul>
+			</li>
+		</c:forEach>
+
       </ul>
     </section>
     <!-- /.sidebar -->
